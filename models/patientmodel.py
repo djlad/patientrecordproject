@@ -7,4 +7,4 @@ class PatientModel(object):
 
     def add_patient(self):
         print(queries["Create Patients Table"])
-        pass
+        return "add patient success"
