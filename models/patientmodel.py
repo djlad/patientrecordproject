@@ -6,5 +6,5 @@ class PatientModel(object):
         pass
 
     def add_patient(self):
-        print(queries["Create Patients Table"])
+        #print(queries["Create Patients Table"])
         return "add patient success"
