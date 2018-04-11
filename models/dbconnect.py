@@ -15,12 +15,10 @@ class Dbconnect(object):
         Dbconnect.db_name = config['DATABASE']
     
     def get_connection():
-        print(Dbconnect.user)
         connection = pymysql.connect(host=Dbconnect.host,
                                     user=Dbconnect.user,
                                     #password=Dbconnect.password,
                                     db=Dbconnect.db_name,
                                     charset='utf8mb4',
                                     cursorclass=pymysql.cursors.DictCursor)
-        print(connection)
-        connection.close()
+        return connection
