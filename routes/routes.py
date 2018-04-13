@@ -1,15 +1,11 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, url_for, redirect
 from models.patientmodel import PatientModel
 
 mainroutes = Blueprint("mainroutes", __name__)
-'''
+
 @mainroutes.route('/')
 def render_general_users_area():
-    patient_model = PatientModel()
-    patient_model.add_patient()
-    #return render_template('general-users.html')
-    return render_template('index.html')
-'''
+    return redirect(url_for('static', filename='index.html'))
 
 @mainroutes.route('/adduser')
 def add_user():
