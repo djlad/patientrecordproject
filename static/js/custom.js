@@ -1,6 +1,4 @@
 jQuery(document).ready(function () {
-
-
     $('#carouselHacked').carousel();
 
     //this code is for the gmap
