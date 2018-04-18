@@ -39,7 +39,7 @@ class UserModel(object):
         try:
             with connection.cursor() as cursor:
                 # Create a new record
-                sql =queries["Remove Appointment"].format(doctorid, patientid, appointmenttime)
+                sql = queries["Remove Appointment"].format(doctorid, patientid, appointmenttime)
                 cursor.execute(sql)
             # connection is not autocommit by default. So you must commit to save
             # your changes.
