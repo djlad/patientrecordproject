@@ -40,7 +40,7 @@ class PatientModel(object):
             connection.close()
         return "remove patient success"
     
-    def get_patient_info(self, name):
+    def get_patient_info_by_name(self, name):
         '''
         method to get patient information from the database
         '''
@@ -49,6 +49,21 @@ class PatientModel(object):
             with connection.cursor() as cursor:
                 # get all patients with passed name
                 sql = queries["Get Patient Info"].format(name)
+                cursor.execute(sql)
+                result = cursor.fetchall()
+        finally:
+            connection.close()
+        return result
+    
+    def get_patient_info_list(self, limit, offset):
+        '''
+        method to get a list of patients from offset to limit
+        '''
+        connection = Dbconnect.get_connection()
+        try:
+            with connection.cursor() as cursor:
+                # get all patients within defined limit and offset
+                sql = queries["Get Patient Info List"].format(limit, offset)
                 cursor.execute(sql)
                 result = cursor.fetchall()
         finally:
