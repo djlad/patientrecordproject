@@ -1,0 +1,2 @@
+. venv/bin/activate
+python -m unittest tests.models.test_patientmodel.TestPatientModel.test_find_user
