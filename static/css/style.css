@@ -36,14 +36,13 @@ h2 {
     position: fixed;
     width: 100%;
     z-index: 99999;
-    height:27%;
+    height:auto;
 }
 
 .header-ghost {
-    height:20px;
     display:block;
     background-color:red;
-    height:27%;
+    height:auto;
 }
 
 .header-backup {
