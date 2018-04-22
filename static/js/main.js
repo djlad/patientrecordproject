@@ -7,7 +7,8 @@ function loadTabs(){
     urls = [
         "landing-page",
         "patients",
-        "appointments"
+        "appointments",
+        "tabholder"
     ]
     var pages = {};
     var elm = document.getElementById(urls[0]);
@@ -19,17 +20,24 @@ function loadTabs(){
         elm = document.getElementById(id);
         function callbackGen(element, id, pages, busyCalls){
             return function(response){
-                element.innerHTML = response;
                 pages[id] = response;
-                busyCalls--;
-                console.log(busyCalls);
             }
         }
         var callback = callbackGen(elm, id, pages, busyCalls);
-        busyCalls+=1;
         $.get(urls[i]+".html", callback);
+    }
+    $(document).ajaxStop(genBuildTabs(pages));
+}
+
+function genBuildTabs(pages){
+    return function(){
+        console.log(pages);
+        tabHolderTemplate = Handlebars.compile(pages["tabholder"]);
+        //document.getElementById("tabholder").innerHTML = tabHolderTemplate(pages);
+        document.body.innerHTML = tabHolderTemplate(pages);
+        console.log(4);
     }
 }
 
-setTimeout(onload, 1000);
-//$( document ).ready(onload);
+//setTimeout(onload, 1000);
+$( document ).ready(onload);
