@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, url_for, redirect, jsonif
 from flask import current_app as app
 from models.patientmodel import PatientModel
 from models.dbconnect import Dbconnect
+import json
 
 mainroutes = Blueprint("mainroutes", __name__)
 
@@ -35,3 +36,17 @@ def get_patient_by_id():
     id = request.form['id']
     patientInfo = pm.get_patient_info_by_id(id)
     return jsonify(patientInfo)
+
+@mainroutes.route('/save', methods=['Post'])
+def save_entry():
+    pm = PatientModel()
+    req = request.get_json()
+    entry = json.loads(req['entry'])
+    pm.change_patient_info(entry['name'],
+                           entry['weight'],
+                           entry['address'],
+                           entry['phone'],
+                           entry['insurance'],
+                           entry['height'],
+                           entry['patientID'])
+    return 'save finished'

@@ -63,9 +63,6 @@ function getPatientInfoById(id, callback){
 }
 
 function goToEditor(id, editorType){
-    console.log('going to patient editor');
-    console.log(id);
-    console.log(pages);
     var editorLink = document.getElementById('editor-link');
     var editorDiv = document.getElementById('editor');
     var template = Handlebars.compile('');
@@ -76,7 +73,6 @@ function goToEditor(id, editorType){
     getPatientInfoById(id, function(response){
         if (response.length > 0){
             response = response[0];
-            console.log(response);
             html = template({editorType:editorType, entry:response});
             editorDiv.innerHTML = html;
         }
