@@ -17,7 +17,7 @@ queries = {
     ''',
     "Change Patient Info":
     '''
-    UPDATE PatientInfo SET `name`=%s, `weight`=%s, `address`=%s, `phone`=%s, `insurance`=%s, `height`=%s WHERE `patientID`=%s;
+    UPDATE PatientInfo SET `name`=%s, `weight`=%s, `address`=%s, `phone`=%s, `insurance`=%s, `height`=%s, medicalhistory=%s WHERE `patientID`=%s;
     ''',
     "Remove Patient":
     '''

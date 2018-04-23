@@ -41,12 +41,13 @@ def get_patient_by_id():
 def save_entry():
     pm = PatientModel()
     req = request.get_json()
-    entry = json.loads(req['entry'])
+    entry = req['entry']
     pm.change_patient_info(entry['name'],
                            entry['weight'],
                            entry['address'],
                            entry['phone'],
                            entry['insurance'],
                            entry['height'],
+                           entry['medicalhistory'],
                            entry['patientID'])
     return 'save finished'

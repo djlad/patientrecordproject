@@ -70,7 +70,7 @@ class PatientModel(object):
             connection.close()
         return result
     
-    def change_patient_info(self, name, weight, address, phone, insurance, height, ID):
+    def change_patient_info(self, name, weight, address, phone, insurance, height, medicalhistory,ID):
         '''
         method to change patient information on database
         '''
@@ -79,7 +79,7 @@ class PatientModel(object):
             with connection.cursor() as cursor:
                 # get all patients with passed name
                 sql = queries["Change Patient Info"]
-                cursor.execute(sql, (name, weight, address, phone, insurance, height, ID))
+                cursor.execute(sql, (name, weight, address, phone, insurance, height, medicalhistory, ID))
                 connection.commit()
         finally:
             connection.close()

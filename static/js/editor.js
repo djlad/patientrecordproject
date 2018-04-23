@@ -1,4 +1,3 @@
-console.log('3');
 function saveEntry(editorType){
     var editorContainer = document.getElementById('editor-inputs');
     var editorInputs = editorContainer.getElementsByTagName('input');
@@ -16,7 +15,8 @@ function saveEntry(editorType){
     //entry['entryType'] = editorType;
     request = {
         entryType:editorType,
-        entry:JSON.stringify(entry),
+        //entry:JSON.stringify(entry),
+        entry:entry,
     }
     Object.assign(request, userInfo);
     $.ajax("/save", {
