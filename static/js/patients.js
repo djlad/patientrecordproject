@@ -22,13 +22,33 @@ function genGetPatients(pages){
             entries:patientsResponse,
             headers:headers
         };
-        console.log(patientsResponse);
-        console.log('hi');
         var entryTemplate = Handlebars.compile(pages['entry']);
         var entry = entryTemplate(pr);
-        console.log(pr);
-        console.log(entry);
-        document.getElementById('patient-holder').innerHTML = entry;
+        var entryElement = document.getElementById('patient-holder');
+
+        entryElement.innerHTML = entry;
+
+        var listItems = entryElement.getElementsByTagName("tr");
+        var input = entryElement.getElementsByTagName("input")[0];
+        var filterCallBack = genFilterCallback(listItems, input);
+        input.addEventListener('keyup', filterCallBack);
     }
     return getPatients;
+}
+
+function genFilterCallback(listItems, input){
+    return function(e){
+        var filter = input.value.toUpperCase();
+        var li;
+        var text;
+        for(var i=0;i<listItems.length;i++) {
+            li = listItems[i];
+            text = li.innerText.toUpperCase();
+            if (text.search(filter) == -1 && filter.length > 0){
+                li.style.display = "none";
+            }else{
+                li.style.display = "table-row";
+            }
+        }
+    }
 }
