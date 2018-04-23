@@ -1,0 +1,18 @@
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            {{#each headers}}
+            <th>{{this}}</th>
+            {{/each}}
+        </tr>
+    </thead>
+    <tbody id="myTable">
+        {{#each entries}}
+        <tr>
+            {{#each this}}
+            <td>{{this}}</td>
+            {{/each}}
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

@@ -1,5 +1,7 @@
-from flask import Blueprint, render_template, request, url_for, redirect
+from flask import Blueprint, render_template, request, url_for, redirect, jsonify
+from flask import current_app as app
 from models.patientmodel import PatientModel
+from models.dbconnect import Dbconnect
 
 mainroutes = Blueprint("mainroutes", __name__)
 
@@ -19,3 +21,9 @@ def add_user():
 @mainroutes.route('/patients')
 def render_patients_area():
     return 'patients'
+
+@mainroutes.route('/getpatients', methods=['GET', 'Post'])
+def get_patients():
+    pm = PatientModel()
+    patient_list = pm.get_patient_info_list()
+    return jsonify(patient_list)

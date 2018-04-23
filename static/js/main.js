@@ -3,39 +3,39 @@ function onload(){
 }
 
 function loadTabs(){
-    console.log(18);
     urls = [
         "landing-page",
         "patients",
         "appointments",
-        "tabholder"
+        "tabholder",
+        "entry"
     ]
     var pages = {};
     var elm = document.getElementById(urls[0]);
 
-    var busyCalls = 0;
+    var ajaxCalls = [];
+
     for(var i=0;i<urls.length;i++){
         var elm = document.getElementById(urls[i]);
         var id = urls[i];
         elm = document.getElementById(id);
-        function callbackGen(element, id, pages, busyCalls){
+        function callbackGen(element, id, pages){
             return function(response){
                 pages[id] = response;
             }
         }
-        var callback = callbackGen(elm, id, pages, busyCalls);
-        $.get(urls[i]+".html", callback);
+        var callback = callbackGen(elm, id, pages);
+        ajaxCalls.push($.get(urls[i]+".html", callback));
     }
-    $(document).ajaxStop(genBuildTabs(pages));
+    $.when.apply($, ajaxCalls).then(genBuildTabs(pages));
 }
 
 function genBuildTabs(pages){
     return function(){
-        console.log(pages);
         tabHolderTemplate = Handlebars.compile(pages["tabholder"]);
-        //document.getElementById("tabholder").innerHTML = tabHolderTemplate(pages);
         document.body.innerHTML = tabHolderTemplate(pages);
-        console.log(4);
+        //from patients.html
+        loadPatients(pages);
     }
 }
 

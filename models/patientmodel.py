@@ -55,7 +55,7 @@ class PatientModel(object):
             connection.close()
         return result
     
-    def get_patient_info_list(self, limit, offset):
+    def get_patient_info_list(self, limit=1000, offset=0):
         '''
         method to get a list of patients from offset to limit
         '''

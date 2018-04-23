@@ -13,7 +13,7 @@ queries = {
     ''',
     "Get Patient Info List":
     '''
-    SELECT * FROM PatientInfo WHERE LIMIT={} OFFSET={};
+    SELECT * FROM PatientInfo LIMIT {} OFFSET {};
     ''',
     "Change Patient Info":
     '''
