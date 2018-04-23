@@ -2,15 +2,22 @@ function onload(){
     loadTabs();
 }
 
+pages = {};
+userInfo = {
+        username:"DanLad1",
+        password:"password1"
+    }
+
 function loadTabs(){
     urls = [
         "landing-page",
         "patients",
         "appointments",
         "tabholder",
-        "entry"
+        "entry",
+        "editor"
     ]
-    var pages = {};
+    //pages = {};
     var elm = document.getElementById(urls[0]);
 
     var ajaxCalls = [];
@@ -38,6 +45,14 @@ function genBuildTabs(pages){
         loadPatients(pages);
     }
 }
+
+Handlebars.registerHelper('if_eq', function(a, b, opts) {
+    if (a == b) {
+        return opts.fn(this);
+    } else {
+        return opts.inverse(this);
+    }
+});
 
 //setTimeout(onload, 1000);
 $( document ).ready(onload);

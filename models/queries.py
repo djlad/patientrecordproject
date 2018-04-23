@@ -9,7 +9,7 @@ queries = {
     ''',
     "Get Patient Info":
     '''
-    SELECT * FROM PatientInfo WHERE name={};
+    SELECT * FROM PatientInfo WHERE patientID={};
     ''',
     "Get Patient Info List":
     '''

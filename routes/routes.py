@@ -27,3 +27,11 @@ def get_patients():
     pm = PatientModel()
     patient_list = pm.get_patient_info_list()
     return jsonify(patient_list)
+
+
+@mainroutes.route('/getpatientbyid', methods=['Post'])
+def get_patient_by_id():
+    pm = PatientModel()
+    id = request.form['id']
+    patientInfo = pm.get_patient_info_by_id(id)
+    return jsonify(patientInfo)

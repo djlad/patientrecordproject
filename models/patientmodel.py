@@ -40,15 +40,15 @@ class PatientModel(object):
             connection.close()
         return "remove patient success"
     
-    def get_patient_info_by_name(self, name):
+    def get_patient_info_by_id(self, ID):
         '''
         method to get patient information from the database
         '''
         connection = Dbconnect.get_connection()
         try:
             with connection.cursor() as cursor:
-                # get all patients with passed name
-                sql = queries["Get Patient Info"].format(name)
+                # get all patients with passed ID
+                sql = queries["Get Patient Info"].format(ID)
                 cursor.execute(sql)
                 result = cursor.fetchall()
         finally:

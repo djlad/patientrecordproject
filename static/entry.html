@@ -10,7 +10,7 @@
     </thead>
     <tbody id="myTable">
         {{#each entries}}
-        <tr>
+        <tr onclick="goToEditor({{patientID}}, 'patient')">
             {{#each this}}
             <td>{{this}}</td>
             {{/each}}
