@@ -19,10 +19,6 @@ def add_user():
     userModel.addUser(request["username"], request["password"])
     return 'doctors'
 
-@mainroutes.route('/patients')
-def render_patients_area():
-    return 'patients'
-
 @mainroutes.route('/getpatients', methods=['GET', 'Post'])
 def get_patients():
     pm = PatientModel()
@@ -42,6 +38,7 @@ def save_entry():
     pm = PatientModel()
     req = request.get_json()
     entry = req['entry']
+    print(req['userInfo'])
     pm.change_patient_info(entry['name'],
                            entry['weight'],
                            entry['address'],
@@ -51,3 +48,11 @@ def save_entry():
                            entry['medicalhistory'],
                            entry['patientID'])
     return 'save finished'
+
+
+@mainroutes.route('/addentry', methods=['Post'])
+def addEntry():
+    entryType = request.form['entryType']
+    if entryType == 'patient':
+        pass
+    return 'entry saved'

@@ -8,8 +8,7 @@ function loadPatients(pages){
 
 function createPatientsList(pages) {
     $.post("/getpatients", {
-        username:"DanLad1",
-        password:"password1"
+        userInfo:userInfo
     }, genGetPatients(pages, 'patient-holder'))
 }
 
@@ -56,8 +55,7 @@ function genFilterCallback(listItems, input){
 
 function getPatientInfoById(id, callback){
     $.post("/getpatientbyid", {
-        username:userInfo.username,
-        password:userInfo.password,
+        userInfo:userInfo,
         id:id
     }, callback)
 }
@@ -78,4 +76,14 @@ function goToEditor(id, editorType){
         }
     });
     editorLink.click();
+}
+
+function addEntry(entryType){
+    /*adds entry (ie patient, doctor) */
+    $.post("/addentry", {
+        userInfo:userInfo,
+        entryType:entryType
+    }, function(){
+        console.log('patient added');
+    }) 
 }

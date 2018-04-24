@@ -17,8 +17,8 @@ function saveEntry(editorType){
         entryType:editorType,
         //entry:JSON.stringify(entry),
         entry:entry,
+        userInfo:userInfo
     }
-    Object.assign(request, userInfo);
     $.ajax("/save", {
         data:JSON.stringify(request),
         contentType:'application/json',
