@@ -9,15 +9,15 @@ queries = {
     ''',
     "Get Patient Info":
     '''
-    SELECT * FROM PatientInfo WHERE name={};
+    SELECT * FROM PatientInfo WHERE patientID={};
     ''',
     "Get Patient Info List":
     '''
-    SELECT * FROM PatientInfo WHERE LIMIT={} OFFSET={};
+    SELECT * FROM PatientInfo LIMIT {} OFFSET {};
     ''',
     "Change Patient Info":
     '''
-    UPDATE PatientInfo SET `name`={},`weight`={},`address`={},`phone`={},`insurance`={} WHERE `patientID`={};
+    UPDATE PatientInfo SET `name`=%s, `weight`=%s, `address`=%s, `phone`=%s, `insurance`=%s, `height`=%s, medicalhistory=%s WHERE `patientID`=%s;
     ''',
     "Remove Patient":
     '''

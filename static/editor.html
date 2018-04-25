@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Edit {{editorType}}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" id='editor-inputs'>
+            {{#if_eq editorType "patient"}}
+            {{/if_eq}}
+            {{#each entry}}
+            <h3>{{ @key }}</h3>
+            <input type="text" value="{{this}}" data-key='{{@key}}'>
+            {{/each}}
+        </div>
+    </div>
+    <button onclick="saveEntry('{{editorType}}')">Save</button>
+    <h4 id='editor-status'></h4>
+</div>

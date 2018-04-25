@@ -40,22 +40,22 @@ class PatientModel(object):
             connection.close()
         return "remove patient success"
     
-    def get_patient_info_by_name(self, name):
+    def get_patient_info_by_id(self, ID):
         '''
         method to get patient information from the database
         '''
         connection = Dbconnect.get_connection()
         try:
             with connection.cursor() as cursor:
-                # get all patients with passed name
-                sql = queries["Get Patient Info"].format(name)
+                # get all patients with passed ID
+                sql = queries["Get Patient Info"].format(ID)
                 cursor.execute(sql)
                 result = cursor.fetchall()
         finally:
             connection.close()
         return result
     
-    def get_patient_info_list(self, limit, offset):
+    def get_patient_info_list(self, limit=1000, offset=0):
         '''
         method to get a list of patients from offset to limit
         '''
@@ -70,7 +70,7 @@ class PatientModel(object):
             connection.close()
         return result
     
-    def change_patient_info(self, name, weight, address, phone, insurance, ID):
+    def change_patient_info(self, name, weight, address, phone, insurance, height, medicalhistory,ID):
         '''
         method to change patient information on database
         '''
@@ -78,8 +78,9 @@ class PatientModel(object):
         try:
             with connection.cursor() as cursor:
                 # get all patients with passed name
-                sql = queries["Change Patient Info"].format(name, weight, address, phone, insurance, ID)
-                cursor.execute(sql)
+                sql = queries["Change Patient Info"]
+                cursor.execute(sql, (name, weight, address, phone, insurance, height, medicalhistory, ID))
+                connection.commit()
         finally:
             connection.close()
         return "successfully altered patient info"

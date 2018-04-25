@@ -1,14 +1,12 @@
-from flask import Blueprint, render_template, request, url_for, redirect
+from flask import Blueprint, render_template, request, url_for, redirect, jsonify
+from flask import current_app as app
 from models.patientmodel import PatientModel
-<<<<<<< Updated upstream
-=======
 from models.usermodel import UserModel
 from models.doctormodel import DoctorModel
 from models.appointmentmodel import AppointmentModel
 from models.prescriptionmodel import PrescriptionModel
 from models.dbconnect import Dbconnect
 import json
->>>>>>> Stashed changes
 
 mainroutes = Blueprint("mainroutes", __name__)
 
@@ -25,11 +23,11 @@ def add_user():
     UserModel.add_user(request["username"], request["password"])
     return 'doctors'
 
-<<<<<<< Updated upstream
+
 @mainroutes.route('/patients')
 def render_patients_area():
     return 'patients'
-=======
+
 @mainroutes.route('/getpatients', methods=['GET', 'Post'])
 def get_patients():
     pm = PatientModel()
@@ -89,4 +87,3 @@ def addEntry():
     if entryType == 'patient':
         pass
     return 'entry saved'
->>>>>>> Stashed changes
