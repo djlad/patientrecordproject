@@ -11,11 +11,11 @@ userInfo = {
 function loadTabs(){
     urls = [
         "landing-page",
-        "patients",
         "appointments",
         "tabholder",
         "entry",
-        "editor"
+        "editor",
+        'selector-table'
     ]
     //pages = {};
     var elm = document.getElementById(urls[0]);
@@ -39,7 +39,9 @@ function loadTabs(){
 
 function genBuildTabs(pages){
     return function(){
-        tabHolderTemplate = Handlebars.compile(pages["tabholder"]);
+        var tabHolderTemplate = Handlebars.compile(pages["tabholder"]);
+        var selectorTemplate = Handlebars.compile(pages['selector-table']);
+        pages['patient'] = selectorTemplate('patient');
         document.body.innerHTML = tabHolderTemplate(pages);
         //from patients.html
         loadPatients(pages);
