@@ -18,8 +18,6 @@ class Dbconnect(object):
     
     @staticmethod
     def get_connection():
-        print('hi')
-        print(Dbconnect.host)
         connection = pymysql.connect(host=Dbconnect.host,
                                     user=Dbconnect.user,
                                     password=Dbconnect.password,
