@@ -25,6 +25,21 @@ def get_patients():
     patient_list = pm.get_patient_info_list()
     return jsonify(patient_list)
 
+@mainroutes.route('/get', methods=['GET', 'Post'])
+def get_entries():
+    entryType = request.form['entryType']
+    if entryType == 'patient':
+        pm = PatientModel()
+        entry_list = pm.get_patient_info_list()
+    if entryType == 'doctor':
+        print('doctors requested')
+        '''TODO: here we need to get all the doctor info
+                 using patients as placeholder for now
+        '''
+        pm = PatientModel()
+        entry_list = pm.get_patient_info_list()
+    return jsonify(entry_list)
+
 
 @mainroutes.route('/getpatientbyid', methods=['Post'])
 def get_patient_by_id():

@@ -3,13 +3,16 @@ console.log("patient.js imported")
 function loadPatients(pages){
     console.log('starting patients');
     //console.log(pages.entry);
-    createPatientsList(pages);
+    createEntryList(pages, 'patient');
+    createEntryList(pages, 'doctor');
 }
 
-function createPatientsList(pages) {
-    $.post("/getpatients", {
+function createEntryList(pages, selectorType) {
+    var holderid = selectorType+'-holder';
+    $.post("/get", {
+        entryType:selectorType,
         userInfo:userInfo
-    }, genGetPatients(pages, 'patient-holder'))
+    }, genGetPatients(pages, holderid))
 }
 
 function genGetPatients(pages, holderid){
