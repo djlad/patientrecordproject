@@ -41,7 +41,8 @@ function genBuildTabs(pages){
     return function(){
         var tabHolderTemplate = Handlebars.compile(pages["tabholder"]);
         var selectorTemplate = Handlebars.compile(pages['selector-table']);
-        pages['patient'] = selectorTemplate('patient');
+        pages['patients'] = selectorTemplate({selectorType:'patient'});
+        console.log(pages['patients'])
         document.body.innerHTML = tabHolderTemplate(pages);
         //from patients.html
         loadPatients(pages);
