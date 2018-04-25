@@ -2,7 +2,7 @@ import pymysql
 from models.dbconnect import Dbconnect
 from models.queries import queries
 
-class PresriptionModel(object):
+class PrescriptionModel(object):
     def __init__(self):
         pass
     
@@ -75,3 +75,18 @@ class PresriptionModel(object):
             return False
         else:
             return result
+    
+    def get_prescription_info_list(self, limit=1000, offset = 0):
+        '''
+        method to get list of prescriptions
+        '''
+        connection = Dbconnect.get_connection()
+        try:
+            with connection.cursor() as cursor:
+                # get all patients within defined limit and offset
+                sql = queries["Get Prescription List"].format(limit, offset)
+                cursor.execute(sql)
+                result = cursor.fetchall()
+        finally:
+            connection.close()
+        return result

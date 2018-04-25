@@ -2,7 +2,7 @@ import pymysql
 from models.dbconnect import Dbconnect
 from models.queries import queries
 
-class UserModel(object):
+class AppointmentModel(object):
     def __init__(self):
         pass
     
@@ -59,6 +59,21 @@ class UserModel(object):
             # your changes.
             connection.commit()
             result = cursor.fetchall()
+        finally:
+            connection.close()
+        return result
+        
+    def get_appointment_info_list(self, limit=1000, offset = 0):
+        '''
+        method to get list of appointments
+        '''
+        connection = Dbconnect.get_connection()
+        try:
+            with connection.cursor() as cursor:
+                # get all patients within defined limit and offset
+                sql = queries["Get Appointment List"].format(limit, offset)
+                cursor.execute(sql)
+                result = cursor.fetchall()
         finally:
             connection.close()
         return result

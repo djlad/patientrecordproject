@@ -78,6 +78,21 @@ class DoctorModel(object):
         else:
             return result
     
+    def get_doctor_info_list(self, limit=1000, offset=0):
+        '''
+        method to get a list of doctorInfo from offset to limit
+        '''
+        connection = Dbconnect.get_connection()
+        try:
+            with connection.cursor() as cursor:
+                # get all patients within defined limit and offset
+                sql = queries["Get Doctor Info List"].format(limit, offset)
+                cursor.execute(sql)
+                result = cursor.fetchall()
+        finally:
+            connection.close()
+        return result
+    
     def remove_patients(self, doctorID):
         '''
         remove doctor from database
