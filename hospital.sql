@@ -74,16 +74,16 @@ CREATE TABLE `PatientInfo` (
 
 LOCK TABLES `PatientInfo` WRITE;
 /*!40000 ALTER TABLE `PatientInfo` DISABLE KEYS */;
-INSERT INTO `PatientInfo` VALUES (1,'Charles Mandel',22,199,'Male',72,'20 Fake Street','311-243-2343','Diabetic','Medical Gold',1996-08-22);
-INSERT INTO `PatientInfo` VALUES (2,'Daniel Ladner',21,150,'Male',66,'32 NotSure Lane','347-222-1023','No Problems','Insurance Pro',1997-06-22);
-INSERT INTO `PatientInfo` VALUES (3,'Louis Pearson',21,200,'Male',68,'205 Bogus Blvd','347-901-1234','Insomnia','AARP',1997-03-22);
-INSERT INTO `PatientInfo` VALUES (4,'Jacob Roberts',47,255,'Male',77,'27 Terminator Drive','313-222-2015','Hernia','Medical Gold',1971-09-15);
-INSERT INTO `PatientInfo` VALUES (5,'Michelle Jacobs',30,135,'Female',64,'300 Butler Place','312-204-2200','Trouble hearing','Blue Cross',1988-07-23);
-INSERT INTO `PatientInfo` VALUES (6,'Dominic Klusek',21,160,'Male',69,'2800 Victory Blvd','376-304-2930','Not many issues','TrumpCare',1996-07-11);
-INSERT INTO `PatientInfo` VALUES (7,'Jamie Michels',28,122,'Female',62,'22 Saint-Ann Street','347-200-2093','Astmha','AARP',1990-03-10);
-INSERT INTO `PatientInfo` VALUES (8,'Nataly James',38,140,'Female',65,'685 Sequel Avenue','312-993-1295','Mood Swings','Blue Cross',1980-05-15);
-INSERT INTO `PatientInfo` VALUES (9,'Michael Jones',58,220,'Male',71,'1001 Jordan Street','917-233-2981','Arthritis','Medical Gold',1960-02-29);
-INSERT INTO `PatientInfo` VALUES (10,'Charles Mandela',88,175,'Male',73,'200 Secret Passage Way','902-199-1254','Dementia','AARP',1930-12-25);
+INSERT INTO `PatientInfo` VALUES (1,'Charles Mandel',22,199,'Male',72,'20 Fake Street','311-243-2343','Diabetic','Medical Gold',"1996-08-22");
+INSERT INTO `PatientInfo` VALUES (2,'Daniel Ladner',21,150,'Male',66,'32 NotSure Lane','347-222-1023','No Problems','Insurance Pro',"1997-06-22");
+INSERT INTO `PatientInfo` VALUES (3,'Louis Pearson',21,200,'Male',68,'205 Bogus Blvd','347-901-1234','Insomnia','AARP',"1997-03-22");
+INSERT INTO `PatientInfo` VALUES (4,'Jacob Roberts',47,255,'Male',77,'27 Terminator Drive','313-222-2015','Hernia','Medical Gold',"1971-09-15");
+INSERT INTO `PatientInfo` VALUES (5,'Michelle Jacobs',30,135,'Female',64,'300 Butler Place','312-204-2200','Trouble hearing','Blue Cross',"1988-07-23");
+INSERT INTO `PatientInfo` VALUES (6,'Dominic Klusek',21,160,'Male',69,'2800 Victory Blvd','376-304-2930','Not many issues','TrumpCare',"1996-07-11");
+INSERT INTO `PatientInfo` VALUES (7,'Jamie Michels',28,122,'Female',62,'22 Saint-Ann Street','347-200-2093','Astmha','AARP',"1990-03-10");
+INSERT INTO `PatientInfo` VALUES (8,'Nataly James',38,140,'Female',65,'685 Sequel Avenue','312-993-1295','Mood Swings','Blue Cross',"1980-05-15");
+INSERT INTO `PatientInfo` VALUES (9,'Michael Jones',58,220,'Male',71,'1001 Jordan Street','917-233-2981','Arthritis','Medical Gold',"1960-02-29");
+INSERT INTO `PatientInfo` VALUES (10,'Charles Mandela',88,175,'Male',73,'200 Secret Passage Way','902-199-1254','Dementia','AARP',"1930-12-25");
 /*!40000 ALTER TABLE `PatientInfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -152,7 +152,7 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
-  `userID` int(11) NOT NULL,
+  `userID` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) DEFAULT NULL,
   `password` varchar(20) DEFAULT NULL,
   `userType` varchar(20) DEFAULT NULL,

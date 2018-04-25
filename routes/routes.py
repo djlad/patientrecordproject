@@ -1,6 +1,10 @@
 from flask import Blueprint, render_template, request, url_for, redirect, jsonify
 from flask import current_app as app
 from models.patientmodel import PatientModel
+from models.usermodel import UserModel
+from models.doctormodel import DoctorModel
+from models.appointmentmodel import AppointmentModel
+from models.prescriptionmodel import PrescriptionModel
 from models.dbconnect import Dbconnect
 import json
 
@@ -16,8 +20,13 @@ def add_user():
         "username":"sample username",
         'password':"sample password"
     }
-    userModel.addUser(request["username"], request["password"])
+    UserModel.add_user(request["username"], request["password"])
     return 'doctors'
+
+
+@mainroutes.route('/patients')
+def render_patients_area():
+    return 'patients'
 
 @mainroutes.route('/getpatients', methods=['GET', 'Post'])
 def get_patients():
@@ -31,13 +40,15 @@ def get_entries():
     if entryType == 'patient':
         pm = PatientModel()
         entry_list = pm.get_patient_info_list()
-    if entryType == 'doctor':
-        print('doctors requested')
-        '''TODO: here we need to get all the doctor info
-                 using patients as placeholder for now
-        '''
-        pm = PatientModel()
-        entry_list = pm.get_patient_info_list()
+    elif entryType == 'doctor':
+        dm = DoctorModel()
+        entry_list = dm.get_doctor_info_list()
+    elif entryType == 'appointment':
+        am = AppointmentModel()
+        entry_list = am.get_appointment_info_list()
+    elif entryType == 'prescription':
+        pm = PrescriptionModel()
+        entry_list = pm.get_prescription_info_list()
     return jsonify(entry_list)
 
 
@@ -68,6 +79,11 @@ def save_entry():
 @mainroutes.route('/addentry', methods=['Post'])
 def addEntry():
     entryType = request.form['entryType']
+    '''
+    1. get last user
+    2. increment id by 1
+    3. add respective user type
+    '''
     if entryType == 'patient':
         pass
     return 'entry saved'

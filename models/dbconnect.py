@@ -22,7 +22,7 @@ class Dbconnect(object):
         print(Dbconnect.host)
         connection = pymysql.connect(host=Dbconnect.host,
                                     user=Dbconnect.user,
-                                    #password=Dbconnect.password,
+                                    password=Dbconnect.password,
                                     db=Dbconnect.db_name,
                                     charset='utf8mb4',
                                     cursorclass=pymysql.cursors.DictCursor)

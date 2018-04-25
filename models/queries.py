@@ -59,6 +59,10 @@ queries = {
     '''
     SELECT * FROM appointment WHERE doctorID={},patientID={},time={};
     ''',
+    "Get Appointment List":
+    '''
+    SELECT * FROM appointment LIMIT={} OFFSET={}
+    ''',
     "Add Prescription":
     '''
     INSERT INTO Prescription VALUES({},{},{});
@@ -75,6 +79,10 @@ queries = {
     '''
     SELECT prescription FROM Prescription WHERE patientID={};
     ''',
+    "Get Prescription List":
+    '''
+    SELECT * FROM prescription LIMIT={} OFFSET={}
+    ''',
     "Add Doctor":
     '''
     INSERT INTO DoctorInfo VALUES({}, {}, {}, {});
@@ -90,6 +98,10 @@ queries = {
     "Get Doctor Info by Specialization":
     '''
     Select name,specialty,location FROM DoctorInfo WHERE specialty={};
+    ''',
+    "Get Doctor Info List":
+    '''
+    SELECT * FROM DoctorInfo LIMIT {} OFFSET {};
     ''',
     "Remove Doctor":
     '''
