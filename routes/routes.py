@@ -24,10 +24,21 @@ def add_user():
     return 'doctors'
 
 
-@mainroutes.route('/login')
-def login():
 
-    return 'patients'
+@mainroutes.route('/login', methods=['Post'])
+def login():
+    userInfo = request.get_json()
+    print(userInfo)
+    username = userInfo['username']
+    password = userInfo['password']
+    #TODO: this function must verify the username/password
+    #and return the userInfo of this user.
+    userInfo = {'username':'djlad', 'password':'pass', 'userType':'admin'}
+    isvalid = False
+    if isvalid:
+        return jsonify(userInfo)
+    else:
+        return 'invalid credentials'
 
 @mainroutes.route('/getpatients', methods=['GET', 'Post'])
 def get_patients():
