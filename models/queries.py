@@ -81,7 +81,7 @@ queries = {
     ''',
     "Get Prescription List":
     '''
-    SELECT * FROM prescription LIMIT={} OFFSET={}
+    SELECT * FROM prescription LIMIT {} OFFSET {}
     ''',
     "Add Doctor":
     '''

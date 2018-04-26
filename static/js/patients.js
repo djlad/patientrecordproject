@@ -6,6 +6,7 @@ function loadPatients(pages){
     createEntryList(pages, 'patient');
     createEntryList(pages, 'doctor');
     createEntryList(pages, 'appointment');
+    createEntryList(pages, 'prescription');
 }
 
 function createEntryList(pages, selectorType) {
