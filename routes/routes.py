@@ -34,7 +34,7 @@ def get_patients():
     patient_list = pm.get_patient_info_list()
     return jsonify(patient_list)
 
-@mainroutes.route('/get', methods=['GET', 'Post'])
+@mainroutes.route('/getentries', methods=['GET', 'Post'])
 def get_entries():
     entryType = request.form['entryType']
     if entryType == 'patient':

@@ -8,7 +8,7 @@ function loadPatients(pages){
 }
 
 function createEntryList(pages, selectorType) {
-    $.post("/get", {
+    $.post("/getentries", {
         entryType:selectorType,
         userInfo:userInfo
     }, genGetPatients(pages, selectorType))
@@ -30,6 +30,7 @@ function genGetPatients(pages, selectorType){
         pr = {
             entries:patientsResponse,
             headers:headers,
+            selectorType:selectorType
         };
         var entryTemplate = Handlebars.compile(pages['entry']);
         var entry = entryTemplate(pr);
@@ -94,6 +95,6 @@ function addEntry(entryType){
         userInfo:userInfo,
         entryType:entryType
     }, function(){
-        console.log('patient added');
+        console.log(entryType + ' added');
     }) 
 }
