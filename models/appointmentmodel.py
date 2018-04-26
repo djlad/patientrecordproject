@@ -72,6 +72,7 @@ class AppointmentModel(object):
             with connection.cursor() as cursor:
                 # get all patients within defined limit and offset
                 sql = queries["Get Appointment List"].format(limit, offset)
+                print(sql)
                 cursor.execute(sql)
                 result = cursor.fetchall()
         finally:

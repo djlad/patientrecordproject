@@ -37,6 +37,7 @@ def get_patients():
 @mainroutes.route('/getentries', methods=['GET', 'Post'])
 def get_entries():
     entryType = request.form['entryType']
+    print(entryType)
     if entryType == 'patient':
         pm = PatientModel()
         entry_list = pm.get_patient_info_list()
@@ -49,6 +50,8 @@ def get_entries():
     elif entryType == 'prescription':
         pm = PrescriptionModel()
         entry_list = pm.get_prescription_info_list()
+    else:
+        entry_list = [{'error':'invalid entry request'}]
     return jsonify(entry_list)
 
 

@@ -5,6 +5,7 @@ function loadPatients(pages){
     //console.log(pages.entry);
     createEntryList(pages, 'patient');
     createEntryList(pages, 'doctor');
+    createEntryList(pages, 'appointment');
 }
 
 function createEntryList(pages, selectorType) {
@@ -34,6 +35,7 @@ function genGetPatients(pages, selectorType){
         };
         var entryTemplate = Handlebars.compile(pages['entry']);
         var entry = entryTemplate(pr);
+        //refers to holder defined in tabholder.html
         var entryElement = document.getElementById(holderid);
 
         entryElement.innerHTML = entry;
