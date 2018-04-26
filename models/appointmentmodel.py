@@ -11,8 +11,8 @@ class AppointmentModel(object):
         try:
             with connection.cursor() as cursor:
                 # Create a new record
-                sql =queries["Add Appointment"].format(doctorid, patientid, appointmenttime)
-                cursor.execute(sql)
+                sql =queries["Add Appointment"]
+                cursor.execute(sql, (doctorid, patientid, appointmenttime))
             # connection is not autocommit by default. So you must commit to save
             # your changes.
             connection.commit()
@@ -25,8 +25,8 @@ class AppointmentModel(object):
         try:
             with connection.cursor() as cursor:
                 # Create a new record
-                sql =queries["Change Appointment"].format(doctorid, patientid, appointmenttime)
-                cursor.execute(sql)
+                sql =queries["Change Appointment"]
+                cursor.execute(sql, (doctorid, patientid, appointmenttime))
             # connection is not autocommit by default. So you must commit to save
             # your changes.
             connection.commit()
@@ -39,8 +39,8 @@ class AppointmentModel(object):
         try:
             with connection.cursor() as cursor:
                 # Create a new record
-                sql = queries["Remove Appointment"].format(doctorid, patientid, appointmenttime)
-                cursor.execute(sql)
+                sql = queries["Remove Appointment"]
+                cursor.execute(sql, (doctorid, patientid, appointmenttime))
             # connection is not autocommit by default. So you must commit to save
             # your changes.
             connection.commit()
@@ -53,8 +53,8 @@ class AppointmentModel(object):
         try:
             with connection.cursor() as cursor:
                 # Create a new record
-                sql = queries["View Appointments"].format(doctorid, patientid)
-                cursor.execute(sql)
+                sql = queries["View Appointments"]
+                cursor.execute(sql, (doctorid, patientid))
             # connection is not autocommit by default. So you must commit to save
             # your changes.
             connection.commit()
@@ -71,8 +71,8 @@ class AppointmentModel(object):
         try:
             with connection.cursor() as cursor:
                 # get all patients within defined limit and offset
-                sql = queries["Get Appointment List"].format(limit, offset)
-                cursor.execute(sql)
+                sql = queries["Get Appointment List"]
+                cursor.execute(sql, (limit, offset))
                 result = cursor.fetchall()
         finally:
             connection.close()

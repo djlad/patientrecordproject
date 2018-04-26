@@ -5,15 +5,15 @@ queries = {
     ''',
     "Add Patient":
     '''
-    INSERT INTO PatientInfo VALUES({},{},{},{},{},{},{},{},{},{},{});
+    INSERT INTO PatientInfo VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);
     ''',
     "Get Patient Info":
     '''
-    SELECT * FROM PatientInfo WHERE patientID={};
+    SELECT * FROM PatientInfo WHERE patientID=%s;
     ''',
     "Get Patient Info List":
     '''
-    SELECT * FROM PatientInfo LIMIT {} OFFSET {};
+    SELECT * FROM PatientInfo LIMIT %s OFFSET %s;
     ''',
     "Change Patient Info":
     '''
@@ -21,90 +21,94 @@ queries = {
     ''',
     "Remove Patient":
     '''
-    DELETE FROM PatientInfo WHERE patientID={};
+    DELETE FROM PatientInfo WHERE patientID=%s;
     ''',
     "Add User":
     '''
-    INSERT INTO user VALUES({}, {}, {}, {}, {});
+    INSERT INTO user VALUES(%s,%s,%s,%s,%s);
+    ''',
+    "Get Last User":
+    '''
+    SELECT * FROM user ORDER BY userID DESC LIMIT 1;
     ''',
     "Remove User":
     '''
-    DELETE FROM user WHERE userID={};
+    DELETE FROM user WHERE userID=%s;
     ''',
     "Change Username":
     '''
-    UPDATE user SET username={} WHERE username={} AND password={};
+    UPDATE user SET username=%s WHERE username=%s AND password=%s;
     ''',
     "Change Password":
     '''
-    UPDATE user SET password={} WHERE username={} AND password={};
+    UPDATE user SET password=%s WHERE username=%s AND password=%s;
     ''',
     "Confirm Credentials":
     '''
-    SELECT userID, userType, permissionLevel FROM user WHERE username={} AND password={};
+    SELECT userID, userType, permissionLevel FROM user WHERE username=%s AND password=%s;
     ''',
     "Create Appointment":
     '''
-    INSERT INTO appointment VALUES({},{},"{}");
+    INSERT INTO appointment VALUES(%s,%s,"%s");
     ''',
     "Alter Appointment":
     '''
-    UPDATE appointment SET time={} WHERE doctorID={},patientID={},time={};
+    UPDATE appointment SET time=%s WHERE doctorID=%s,patientID=%s,time=%s;
     ''',
     "Remove Appointment":
     '''
-    DELETE FROM appointment WHERE doctorID={},patientID={},time={};
+    DELETE FROM appointment WHERE doctorID=%s,patientID=%s,time=%s;
     ''',
     "View Appointments":
     '''
-    SELECT * FROM appointment WHERE doctorID={},patientID={},time={};
+    SELECT * FROM appointment WHERE doctorID=%s,patientID=%s,time=%s;
     ''',
     "Get Appointment List":
     '''
-    SELECT * FROM appointment LIMIT={} OFFSET={}
+    SELECT * FROM appointment LIMIT %s OFFSET %s
     ''',
     "Add Prescription":
     '''
-    INSERT INTO Prescription VALUES({},{},{});
+    INSERT INTO Prescription VALUES(%s,%s,%s);
     ''',
     "Change Prescription":
     '''
-    UPDATE Prescription SET prescription={} WHERE doctorID={},patientID={},prescription={};
+    UPDATE Prescription SET prescription=%s WHERE doctorID=%s,patientID=%s,prescription=%s;
     ''',
     "Remove Prescription":
     '''
-    DELETE FROM Prescription WHERE doctorID={},patientID={},prescription={);
+    DELETE FROM Prescription WHERE doctorID=%s,patientID=%s,prescription={);
     ''',
     "Get Patient Prescriptions":
     '''
-    SELECT prescription FROM Prescription WHERE patientID={};
+    SELECT prescription FROM Prescription WHERE patientID=%s;
     ''',
     "Get Prescription List":
     '''
-    SELECT * FROM prescription LIMIT={} OFFSET={}
+    SELECT * FROM prescription LIMIT %s OFFSET %s
     ''',
     "Add Doctor":
     '''
-    INSERT INTO DoctorInfo VALUES({}, {}, {}, {});
+    INSERT INTO DoctorInfo VALUES(%s, %s, %s, %s);
     ''',
     "Change Doctor":
     '''
-    UPDATE DoctorInfo SET `name`={}, `specialty`={}, `location`={};
+    UPDATE DoctorInfo SET `name`=%s, `specialty`=%s, `location`=%s;
     ''',
     "Get Doctor Info by Name":
     '''
-    Select name,specialty,location FROM DoctorInfo WHERE name={};
+    Select name,specialty,location FROM DoctorInfo WHERE name=%s;
     ''',
     "Get Doctor Info by Specialization":
     '''
-    Select name,specialty,location FROM DoctorInfo WHERE specialty={};
+    Select name,specialty,location FROM DoctorInfo WHERE specialty=%s;
     ''',
     "Get Doctor Info List":
     '''
-    SELECT * FROM DoctorInfo LIMIT {} OFFSET {};
+    SELECT * FROM DoctorInfo LIMIT %s OFFSET %s;
     ''',
     "Remove Doctor":
     '''
-    DELETE FROM DoctorInfo WHERE doctorID={};
+    DELETE FROM DoctorInfo WHERE doctorID=%s;
     '''
 }

@@ -6,6 +6,7 @@ from models.doctormodel import DoctorModel
 from models.appointmentmodel import AppointmentModel
 from models.prescriptionmodel import PrescriptionModel
 from models.dbconnect import Dbconnect
+import random
 import json
 
 mainroutes = Blueprint("mainroutes", __name__)
@@ -61,11 +62,11 @@ def get_patient_by_id():
 
 @mainroutes.route('/save', methods=['Post'])
 def save_entry():
-    pm = PatientModel()
     req = request.get_json()
-    entry = req['entry']
-    print(req['userInfo'])
-    pm.change_patient_info(entry['name'],
+    entryType = request.form['entryType']
+    if 'patient':
+        pm = PatientModel()
+        pm.change_patient_info(entry['name'],
                            entry['weight'],
                            entry['address'],
                            entry['phone'],
@@ -73,17 +74,54 @@ def save_entry():
                            entry['height'],
                            entry['medicalhistory'],
                            entry['patientID'])
+    elif 'doctor':
+        dm = DoctorModel()
+        dm.change_doctor_info(entry['name'], 
+                           entry['specialty'], 
+                           entry['location'])
     return 'save finished'
 
 
 @mainroutes.route('/addentry', methods=['Post'])
 def addEntry():
     entryType = request.form['entryType']
-    '''
-    1. get last user
-    2. increment id by 1
-    3. add respective user type
-    '''
     if entryType == 'patient':
-        pass
+        '''
+        1. create usermodel object
+        2. add a new user
+        3. get just added user
+        4. create patientmodel object
+        5. add a default patient entry
+        return
+        '''
+        um = UserModel()
+        um.add_user(None,random_garbage(),random_garbage(),"patient", 3)
+        lastEntry = um.get_last_entry()
+        pm = PatientModel()
+        pm.add_patient(lastEntry['userID'],"",0,0,"",0,"","","","","1111-11-11")
+    elif entryType == "doctor":
+        '''
+        1. create usermodel object
+        2. add a new user
+        3. get just added user
+        4. create doctormodel object
+        5. add a default doctor entry
+        return
+        '''
+        um = UserModel()
+        um.add_user(None,random_garbage(),random_garbage(),"doctor", 2)
+        lastEntry = um.get_last_entry()
+        dm = DoctorModel()
+        dm.add_doctor(lastEntry['userID'],"","","")
     return 'entry saved'
+
+def random_garbage():
+    '''
+    function to create a random username and password when creating a new user
+    '''
+    returnString = ""
+    junk = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWX1234567890@_-+="
+    for i in range(0, 10):
+        rand = random.randint(0, len(junk)-1)
+        returnString+=junk[rand]
+    return returnString

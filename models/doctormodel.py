@@ -14,8 +14,8 @@ class DoctorModel(object):
         try:
             with connection.cursor() as cursor:
                 # create a new user index
-                sql = queries["Add Doctor"].format(doctorID, name, specialty, location)
-                cursor.execute(sql)
+                sql = queries["Add Doctor"]
+                cursor.execute(sql, (doctorID, name, specialty, location))
             # connection is not autocommit by default. So you must commit to save
             # your changes.
             connection.commit()
@@ -31,8 +31,8 @@ class DoctorModel(object):
         try:
             with connection.cursor() as cursor:
                 # create a new user index
-                sql = queries["Change Doctor"].format()
-                cursor.execute(sql)
+                sql = queries["Change Doctor"]
+                cursor.execute(sql, (name, specialty, location))
             # connection is not autocommit by default. So you must commit to save
             # your changes.
             connection.commit()
@@ -48,8 +48,8 @@ class DoctorModel(object):
         try:
             with connection.cursor() as cursor:
                 # get all prescriptions assigned to a patient
-                sql = queries["Get Doctor Info by Name"].format(name)
-                cursor.execute(sql)
+                sql = queries["Get Doctor Info by Name"]
+                cursor.execute(sql, (name))
                 # get result of prescriptions query
                 result = cursor.fetchall()
         finally:
@@ -67,8 +67,8 @@ class DoctorModel(object):
         try:
             with connection.cursor() as cursor:
                 # get all prescriptions assigned to a patient
-                sql = queries["Get Doctor Info by Specialization"].format(specialization)
-                cursor.execute(sql)
+                sql = queries["Get Doctor Info by Specialization"]
+                cursor.execute(sql, (specialization))
                 # get result of prescriptions query
                 result = cursor.fetchall()
         finally:
@@ -86,8 +86,8 @@ class DoctorModel(object):
         try:
             with connection.cursor() as cursor:
                 # get all patients within defined limit and offset
-                sql = queries["Get Doctor Info List"].format(limit, offset)
-                cursor.execute(sql)
+                sql = queries["Get Doctor Info List"]
+                cursor.execute(sql, (limit, offset))
                 result = cursor.fetchall()
         finally:
             connection.close()
@@ -101,8 +101,8 @@ class DoctorModel(object):
         try:
             with connection.cursor() as cursor:
                 # get all prescriptions assigned to a patient
-                sql = queries["Remove Doctor"].format(doctorID)
-                cursor.execute(sql)
+                sql = queries["Remove Doctor"]
+                cursor.execute(sql, (doctorID))
         finally:
             connection.close()
         return "remove doctor success"
