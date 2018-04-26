@@ -61,8 +61,14 @@ queries = {
     ''',
     "Get Appointment List":
     '''
-    SELECT * FROM appointment LIMIT {} OFFSET {};
+    SELECT appointment.time, patientInfo.name, appointment.doctorID
+    FROM appointment
+    INNER JOIN patientInfo ON appointment.patientID = patientInfo.patientID
+    LIMIT {} OFFSET {};
     ''',
+    #use this inner join when doctor id's are fixed
+    #(right now the doctor ids don't match up to doctors)
+    #--INNER JOIN doctorInfo ON appointment.doctorID = doctorInfo.doctorID
     "Add Prescription":
     '''
     INSERT INTO Prescription VALUES({},{},{});
