@@ -19,7 +19,7 @@
             </thead>
             <tbody id="myTable">
                 {{#each entries}}
-                <tr onclick="goToEditor({{patientID}}, 'patient')" >
+                <tr onclick="goToEditor({{ID}}, '{{selectorType}}')" >
                     {{#each this}}
                     <td>{{this}}</td>
                     {{/each}}

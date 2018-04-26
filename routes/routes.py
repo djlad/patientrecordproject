@@ -52,12 +52,18 @@ def get_entries():
     return jsonify(entry_list)
 
 
-@mainroutes.route('/getpatientbyid', methods=['Post'])
-def get_patient_by_id():
-    pm = PatientModel()
+@mainroutes.route('/getentrybyid', methods=['Post'])
+def get_entry_by_id():
     id = request.form['id']
-    patientInfo = pm.get_patient_info_by_id(id)
-    return jsonify(patientInfo)
+    entryType = request.form['entryType']
+    if entryType == 'patient':
+        pm = PatientModel()
+        info = pm.get_patient_info_by_id(id)
+    elif entryType == 'doctor':
+        print('yo')
+        dm = DoctorModel()
+        info = [{'location':'none', 'name':'ox', 'home':'yo'}]
+    return jsonify(info)
 
 @mainroutes.route('/save', methods=['Post'])
 def save_entry():
