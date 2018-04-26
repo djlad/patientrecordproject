@@ -60,9 +60,14 @@ def get_entry_by_id():
         pm = PatientModel()
         info = pm.get_patient_info_by_id(id)
     elif entryType == 'doctor':
-        print('yo')
         dm = DoctorModel()
-        info = [{'location':'none', 'name':'ox', 'home':'yo'}]
+        info = [{'testdata':'placeholder'}]
+    elif entryType == 'appointment':
+        am = AppointmentModel()
+        info = [{'testdata':'placeholder'}]
+    elif entryType == 'prescription':
+        pm = PrescriptionModel()
+        info = [{'testdata':'placeholder'}]
     return jsonify(info)
 
 @mainroutes.route('/save', methods=['Post'])
