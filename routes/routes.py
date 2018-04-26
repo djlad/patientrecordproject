@@ -24,8 +24,9 @@ def add_user():
     return 'doctors'
 
 
-@mainroutes.route('/patients')
-def render_patients_area():
+@mainroutes.route('/login')
+def login():
+
     return 'patients'
 
 @mainroutes.route('/getpatients', methods=['GET', 'Post'])

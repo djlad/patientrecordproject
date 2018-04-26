@@ -3,12 +3,12 @@
 	<header class="top-header">
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-5 header-logo">
+				<div class="col-xs-4 header-logo">
 					<br>
 					<a href="index.html"><img src="img/logo.png" alt="" class="img-responsive logo"></a>
 				</div>
 
-				<div class="col-md-7">
+				<div class="col-md-8">
 					<nav class="navbar navbar-default">
 					  <div class="container-fluid nav-bar">
 					    <!-- Brand and toggle get grouped for better mobile display -->
@@ -26,14 +26,47 @@
 					      
 					      <ul class="nav nav-tabs navbar-nav navbar-right">
 					        <li class="active"><a class="menu" data-toggle="tab" href="#landing-page" >Home</a></li>
-							<!--<li><a class="menu" data-toggle="tab" href="#about">about us</a></li>
-					        <li><a class="menu" data-toggle="tab" href="#service">our services </a></li>
-					        <li><a class="menu" data-toggle="tab" href="#team">our team</a></li>
-					        <li><a class="menu" data-toggle="tab" href="#contact">contact us</a></li>-->
-					        <li><a class="menu" data-toggle="tab" href="#patients">patients</a></li>
-					        <li><a class="menu" data-toggle="tab" href="#doctors">doctors</a></li>
-					        <li><a class="menu" data-toggle="tab" href="#appointments">appointments</a></li>
-					        <li><a class="menu" data-toggle="tab" href="#prescriptions">prescriptions</a></li>
+									<li class='dropdown'>
+										<a class="dropdown-toggle" data-toggle="dropdown" href="#">Patients
+										<span class="caret"></span></a>
+										<ul class='dropdown-menu'>
+											<li><a class="menu" data-toggle="tab" href="#appointments">view appointments</a></li>
+										</ul>
+									</li>
+
+									<li class='dropdown'>
+										<a class="dropdown-toggle" data-toggle="dropdown" href="#">Nurse
+										<span class="caret"></span></a>
+										<ul class='dropdown-menu'>
+											<li><a class="menu" data-toggle="tab" href="#patients">patients</a></li>
+											<li><a class="menu" data-toggle="tab" href="#doctors">doctors</a></li>
+											<li><a class="menu" data-toggle="tab" href="#appointments">appointments</a></li>
+											<li><a class="menu" data-toggle="tab" href="#prescriptions">prescriptions</a></li>
+										</ul>
+									</li>
+
+									<li class='dropdown'>
+										<a class="dropdown-toggle" data-toggle="dropdown" href="#">Doctor
+										<span class="caret"></span></a>
+										<ul class='dropdown-menu'>
+											<li><a class="menu" data-toggle="tab" href="#patients">patients</a></li>
+											<li><a class="menu" data-toggle="tab" href="#doctors">doctors</a></li>
+											<li><a class="menu" data-toggle="tab" href="#appointments">appointments</a></li>
+											<li><a class="menu" data-toggle="tab" href="#prescriptions">prescriptions</a></li>
+										</ul>
+									</li>
+
+									<li class='dropdown'>
+										<a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin
+										<span class="caret"></span></a>
+										<ul class='dropdown-menu'>
+											<li><a class="menu" data-toggle="tab" href="#patients">patients</a></li>
+											<li><a class="menu" data-toggle="tab" href="#doctors">doctors</a></li>
+											<li><a class="menu" data-toggle="tab" href="#appointments">appointments</a></li>
+											<li><a class="menu" data-toggle="tab" href="#prescriptions">prescriptions</a></li>
+										</ul>
+									</li>
+									<li><a class="menu" data-toggle="tab" href="#login">login</a></li>
 					        <li><a id="editor-link" class="menu" data-toggle="tab" href="#editor">editor</a></li>
 					      </ul>
 					    </div><!-- /navbar-collapse -->
@@ -70,10 +103,6 @@
 					      
 					      <ul class="nav nav-tabs navbar-nav navbar-right">
 					        <li class="active"><a class="menu" data-toggle="tab" href="#landing-page" >Home</a></li>
-							<!--<li><a class="menu" data-toggle="tab" href="#about">about us</a></li>
-					        <li><a class="menu" data-toggle="tab" href="#service">our services </a></li>
-					        <li><a class="menu" data-toggle="tab" href="#team">our team</a></li>
-					        <li><a class="menu" data-toggle="tab" href="#contact">contact us</a></li>-->
 					        <li><a class="menu" data-toggle="tab" href="#patients">patients</a></li>
 					        <li><a class="menu" data-toggle="tab" href="#doctors">doctors</a></li>
 					        <li><a class="menu" data-toggle="tab" href="#appointments">appointments</a></li>
@@ -113,6 +142,11 @@
 		<!-- prescription tab-->
 		<div id="prescriptions" class="tab-pane">
 			{{{prescriptions}}}
+		</div>
+
+		<!-- login tab-->
+		<div id="login" class="tab-pane">
+			{{{login}}}
 		</div>
 
 		<!-- editor tab (for editing entries in the database) -->

@@ -1,0 +1,19 @@
+<div id="login" class="tab-pane">
+    <h3>Please log in</h3> <br><br>
+    User Name: <input type='text' name='username'/><br><br>
+    Password:  <input type='password' name='password'/><br><br>
+    <a href="" style="color:purple">Forgot login credentials? Click here</a><br>
+    <a href="" style="color:purple">Don't have account? Click here to sign up</a><br>
+    <input type='submit' name='login' value='Log in'/>
+    <br><br>
+</div>
+<script>
+function signup() {
+    var x = document.getElementById("signup");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+</script>

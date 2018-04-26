@@ -15,7 +15,8 @@ function loadTabs(){
         "tabholder",
         "entry",
         "editor",
-        'selector-table'
+        'selector-table',
+        'login'
     ]
     //pages = {};
     var elm = document.getElementById(urls[0]);
@@ -48,6 +49,7 @@ function genBuildTabs(pages){
         document.body.innerHTML = tabHolderTemplate(pages);
         //from patients.html
         loadPatients(pages);
+        loadLogin();
     }
 }
 
