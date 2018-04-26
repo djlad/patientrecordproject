@@ -25,9 +25,21 @@ def add_user():
     return 'doctors'
 
 
-@mainroutes.route('/patients')
-def render_patients_area():
-    return 'patients'
+
+@mainroutes.route('/login', methods=['Post'])
+def login():
+    userInfo = request.get_json()
+    print(userInfo)
+    username = userInfo['username']
+    password = userInfo['password']
+    #TODO: this function must verify the username/password
+    #and return the userInfo of this user.
+    userInfo = {'username':'djlad', 'password':'pass', 'userType':'admin'}
+    isvalid = False
+    if isvalid:
+        return jsonify(userInfo)
+    else:
+        return 'invalid credentials'
 
 @mainroutes.route('/getpatients', methods=['GET', 'Post'])
 def get_patients():
@@ -35,9 +47,10 @@ def get_patients():
     patient_list = pm.get_patient_info_list()
     return jsonify(patient_list)
 
-@mainroutes.route('/get', methods=['GET', 'Post'])
+@mainroutes.route('/getentries', methods=['GET', 'Post'])
 def get_entries():
     entryType = request.form['entryType']
+    print(entryType)
     if entryType == 'patient':
         pm = PatientModel()
         entry_list = pm.get_patient_info_list()
@@ -50,15 +63,28 @@ def get_entries():
     elif entryType == 'prescription':
         pm = PrescriptionModel()
         entry_list = pm.get_prescription_info_list()
+    else:
+        entry_list = [{'error':'invalid entry request'}]
     return jsonify(entry_list)
 
 
-@mainroutes.route('/getpatientbyid', methods=['Post'])
-def get_patient_by_id():
-    pm = PatientModel()
+@mainroutes.route('/getentrybyid', methods=['Post'])
+def get_entry_by_id():
     id = request.form['id']
-    patientInfo = pm.get_patient_info_by_id(id)
-    return jsonify(patientInfo)
+    entryType = request.form['entryType']
+    if entryType == 'patient':
+        pm = PatientModel()
+        info = pm.get_patient_info_by_id(id)
+    elif entryType == 'doctor':
+        dm = DoctorModel()
+        info = [{'testdata':'placeholder'}]
+    elif entryType == 'appointment':
+        am = AppointmentModel()
+        info = [{'testdata':'placeholder'}]
+    elif entryType == 'prescription':
+        pm = PrescriptionModel()
+        info = [{'testdata':'placeholder'}]
+    return jsonify(info)
 
 @mainroutes.route('/save', methods=['Post'])
 def save_entry():

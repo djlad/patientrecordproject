@@ -1,9 +1,9 @@
 <div class="row">
     <div class="col-md-10">
-        <input class="form-control" id="myInput" type="text" placeholder="Search..">
+        <input class="form-control" type="text" placeholder="Search..">
     </div>
     <div class="col-md-2">
-        <button class="btn-primary" onclick="addEntry('patient')">Add</button>
+        <button class="btn-primary" onclick="addEntry('{{selectorType}}')">Add</button>
     </div>
 </div>
 <br>
@@ -17,9 +17,9 @@
                     {{/each}}
                 </tr>
             </thead>
-            <tbody id="myTable">
+            <tbody>
                 {{#each entries}}
-                <tr onclick="goToEditor({{patientID}}, 'patient')" >
+                <tr onclick="goToEditor({{ID}}, '{{selectorType}}')" >
                     {{#each this}}
                     <td>{{this}}</td>
                     {{/each}}

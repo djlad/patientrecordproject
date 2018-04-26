@@ -65,7 +65,10 @@ queries = {
     ''',
     "Get Appointment List":
     '''
-    SELECT * FROM appointment LIMIT %s OFFSET %s
+    SELECT appointment.time, patientInfo.name, appointment.doctorID
+    FROM appointment
+    INNER JOIN patientInfo ON appointment.patientID = patientInfo.patientID
+    LIMIT %s OFFSET %s;
     ''',
     "Add Prescription":
     '''

@@ -5,28 +5,38 @@ function loadPatients(pages){
     //console.log(pages.entry);
     createEntryList(pages, 'patient');
     createEntryList(pages, 'doctor');
+    createEntryList(pages, 'appointment');
+    createEntryList(pages, 'prescription');
 }
 
 function createEntryList(pages, selectorType) {
-    var holderid = selectorType+'-holder';
-    $.post("/get", {
+    $.post("/getentries", {
         entryType:selectorType,
         userInfo:userInfo
-    }, genGetPatients(pages, holderid))
+    }, genGetPatients(pages, selectorType))
 }
 
-function genGetPatients(pages, holderid){
+function genGetPatients(pages, selectorType){
+    var holderid = selectorType+'-holder';
+    var idName = selectorType+'ID';
     function getPatients(patientsResponse){
+        for (var i=0;i<patientsResponse.length;i++){
+            patientsResponse[i].ID = patientsResponse[i][idName];
+            patientsResponse[i].selectorType = selectorType;
+            delete patientsResponse[i][idName];
+        }
         var headers = [];
         if (patientsResponse.length > 0){
             headers = Object.keys(patientsResponse[0]);
         }
         pr = {
             entries:patientsResponse,
-            headers:headers
+            headers:headers,
+            selectorType:selectorType
         };
         var entryTemplate = Handlebars.compile(pages['entry']);
         var entry = entryTemplate(pr);
+        //refers to holder defined in tabholder.html
         var entryElement = document.getElementById(holderid);
 
         entryElement.innerHTML = entry;
@@ -56,10 +66,11 @@ function genFilterCallback(listItems, input){
     }
 }
 
-function getPatientInfoById(id, callback){
-    $.post("/getpatientbyid", {
+function getEntryById(id, entryType, callback){
+    $.post("/getentrybyid", {
         userInfo:userInfo,
-        id:id
+        id:id,
+        entryType:entryType
     }, callback)
 }
 
@@ -68,12 +79,12 @@ function goToEditor(id, editorType){
     var editorDiv = document.getElementById('editor');
     var template = Handlebars.compile('');
     var html;
-    if (editorType === "patient") {
-        template = Handlebars.compile(pages['editor']);
-    }
-    getPatientInfoById(id, function(response){
+    template = Handlebars.compile(pages['editor']);
+    //editorType is same as entry type in database
+    getEntryById(id, editorType, function(response){
         if (response.length > 0){
             response = response[0];
+            console.log(response);
             html = template({editorType:editorType, entry:response});
             editorDiv.innerHTML = html;
         }
@@ -87,6 +98,6 @@ function addEntry(entryType){
         userInfo:userInfo,
         entryType:entryType
     }, function(){
-        console.log('patient added');
+        console.log(entryType + ' added');
     }) 
 }

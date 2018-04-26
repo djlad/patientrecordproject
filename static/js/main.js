@@ -9,13 +9,16 @@ userInfo = {
     }
 
 function loadTabs(){
+
+    console.log('here')
     urls = [
         "landing-page",
         "appointments",
         "tabholder",
         "entry",
         "editor",
-        'selector-table'
+        'selector-table',
+        'login'
     ]
     //pages = {};
     var elm = document.getElementById(urls[0]);
@@ -42,10 +45,13 @@ function genBuildTabs(pages){
         var tabHolderTemplate = Handlebars.compile(pages["tabholder"]);
         var selectorTemplate = Handlebars.compile(pages['selector-table']);
         pages['patients'] = selectorTemplate({selectorType:'patient'});
+        pages['appointments'] = selectorTemplate({selectorType:'appointment'});
+        pages['prescriptions'] = selectorTemplate({selectorType:'prescription'});
         pages['doctors'] = selectorTemplate({selectorType:'doctor'});
         document.body.innerHTML = tabHolderTemplate(pages);
         //from patients.html
         loadPatients(pages);
+        loadLogin();
     }
 }
 
