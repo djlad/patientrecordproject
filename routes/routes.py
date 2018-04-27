@@ -34,8 +34,12 @@ def login():
     password = userInfo['password']
     #TODO: this function must verify the username/password
     #and return the userInfo of this user.
-    userInfo = {'username':'djlad', 'password':'pass', 'userType':'admin'}
-    isvalid = False
+    um = UserModel()
+    userInfo = um.confirm_credentials(username, password)
+    if userInfo == None:
+        isvalid = False
+    else:
+        isvalid = True
     if isvalid:
         return jsonify(userInfo)
     else:
