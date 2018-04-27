@@ -77,6 +77,8 @@ def get_entries():
 def get_entry_by_id():
     id = request.form['id']
     entryType = request.form['entryType']
+    print('hello world')
+    print(entryType)
     if entryType == 'patient':
         pm = PatientModel()
         info = pm.get_patient_info_by_id(id)
