@@ -17,7 +17,6 @@ function onLogin(){
         contentType:'application/json',
         type: 'POST',
         success: function(response){
-            console.log(response)
             if ('invalid credentials' === response){
                 openModal('Login', 'Invalid Username or Password');
             } else {

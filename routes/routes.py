@@ -29,14 +29,15 @@ def add_user():
 @mainroutes.route('/login', methods=['Post'])
 def login():
     userInfo = request.get_json()
-    print(userInfo)
     username = userInfo['username']
     password = userInfo['password']
     #TODO: this function must verify the username/password
     #and return the userInfo of this user.
     um = UserModel()
     userInfo = um.confirm_credentials(username, password)
-    if userInfo == None:
+    print('userInfo')
+    print(userInfo)
+    if not userInfo:
         isvalid = False
     else:
         isvalid = True
