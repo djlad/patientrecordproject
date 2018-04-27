@@ -4,8 +4,8 @@ function onload(){
 
 pages = {};
 userInfo = {
-        username:"DanLad1",
-        password:"password1"
+        //username:"DanLad1",
+        //password:"password1"
     }
 
 function loadTabs(){
