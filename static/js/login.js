@@ -19,9 +19,7 @@ function onLogin(){
         success: function(response){
             console.log(response)
             if ('invalid credentials' === response){
-                console.log('invalidated');
-                var loginModal = document.getElementById('login-modal');
-                console.log(loginModal);
+                openModal('Login', 'Invalid Username or Password');
             } else {
                 userInfo = response;
             }

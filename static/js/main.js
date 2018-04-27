@@ -55,6 +55,15 @@ function genBuildTabs(pages){
     }
 }
 
+function openModal(header, body){
+    var loginModal = $('#alert-modal');
+    var bodyElm = loginModal.find('p');
+    var headerElm = loginModal.find('h4');
+    bodyElm.text(body);
+    headerElm.text(header);
+    loginModal.modal();
+}
+
 Handlebars.registerHelper('if_eq', function(a, b, opts) {
     if (a == b) {
         return opts.fn(this);
