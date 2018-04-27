@@ -29,3 +29,13 @@ function saveEntry(editorType){
             loadPatients(pages);
         }});
 }
+
+function submitEntry(request, callback){
+    console.log(request);
+    $.ajax("/save", {
+        data:JSON.stringify(request),
+        contentType:'application/json',
+        type: 'POST',
+        success: callback
+    });
+}

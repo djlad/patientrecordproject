@@ -96,8 +96,9 @@ def get_entry_by_id():
 @mainroutes.route('/save', methods=['Post'])
 def save_entry():
     req = request.get_json()
-    entryType = request.form['entryType']
-    if 'patient':
+    entryType = req['entryType']
+    entry = req['entry']
+    if entryType == 'patient':
         pm = PatientModel()
         pm.change_patient_info(entry['name'],
                            entry['weight'],
@@ -107,7 +108,7 @@ def save_entry():
                            entry['height'],
                            entry['medicalhistory'],
                            entry['patientID'])
-    elif 'doctor':
+    elif entryType == 'doctor':
         dm = DoctorModel()
         dm.change_doctor_info(entry['name'], 
                            entry['specialty'], 

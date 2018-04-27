@@ -13,7 +13,7 @@ function getEntries(entryType, callback){
     $.post("/getentries", {
         entryType:entryType,
         userInfo:userInfo
-    }, callback)
+    }, callback);
 }
 
 function createEntryList(pages, selectorType) {
