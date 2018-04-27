@@ -14,8 +14,8 @@ class PatientModel(object):
         try:
             with connection.cursor() as cursor:
                 # Create a new record
-                sql =queries["Add Patient"].format(ID, name, age, weight, gender, height, address, phone, medicalhistory, insurance, DOB)
-                cursor.execute(sql)
+                sql =queries["Add Patient"]
+                cursor.execute(sql, (ID, name, age, weight, gender, height, address, phone, medicalhistory, insurance, DOB))
             # connection is not autocommit by default. So you must commit to save
             # your changes.
             connection.commit()
@@ -31,8 +31,8 @@ class PatientModel(object):
         try:
             with connection.cursor() as cursor:
                 # Create a new record
-                sql =queries["Remove Patient"].format(ID)
-                cursor.execute(sql)
+                sql =queries["Remove Patient"]
+                cursor.execute(sql, (ID))
             # connection is not autocommit by default. So you must commit to save
             # your changes.
             connection.commit()
@@ -48,8 +48,8 @@ class PatientModel(object):
         try:
             with connection.cursor() as cursor:
                 # get all patients with passed ID
-                sql = queries["Get Patient Info"].format(ID)
-                cursor.execute(sql)
+                sql = queries["Get Patient Info"]
+                cursor.execute(sql, (ID))
                 result = cursor.fetchall()
         finally:
             connection.close()
@@ -63,8 +63,8 @@ class PatientModel(object):
         try:
             with connection.cursor() as cursor:
                 # get all patients within defined limit and offset
-                sql = queries["Get Patient Info List"].format(limit, offset)
-                cursor.execute(sql)
+                sql = queries["Get Patient Info List"]
+                cursor.execute(sql, (limit, offset))
                 result = cursor.fetchall()
         finally:
             connection.close()

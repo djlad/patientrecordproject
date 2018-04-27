@@ -15,8 +15,8 @@ class UserModel(object):
         try:
             with connection.cursor() as cursor:
                 # create a new user index
-                sql = queries["Add User"].format(id, username, password, userType, permissionLevel)
-                cursor.execute(sql)
+                sql = queries["Add User"]
+                cursor.execute(sql, (id, username, password, userType, int(permissionLevel)))
             # connection is not autocommit by default. So you must commit to save
             # your changes.
             connection.commit()
@@ -32,8 +32,8 @@ class UserModel(object):
         try:
             with connection.cursor() as cursor:
                 # remove user from database
-                sql = queries["Remove User"].format(id)
-                cursor.execute(sql)
+                sql = queries["Remove User"]
+                cursor.execute(sql, (id))
             # connection is not autocommit by default. So you must commit to save
             # your changes.
             connection.commit()
@@ -51,8 +51,8 @@ class UserModel(object):
         try:
             with connection.cursor() as cursor:
                 # modify user's username with inputted credentials
-                sql = queries["Change Username"].format(newUsername, username, password)
-                cursor.execute(sql)
+                sql = queries["Change Username"]
+                cursor.execute(sql, (newUsername, username, password))
             # connection is not autocommit by default. So you must commit to save
             # your changes.
             connection.commit()
@@ -68,7 +68,26 @@ class UserModel(object):
         try:
             with connection.cursor() as cursor:
                 # confirm account credentials
-                sql = queries["Confirm Credentials"].format(username, password)
+                sql = queries["Confirm Credentials"]
+                cursor.execute(sql, (username, password))
+                # get result of confirming credentials
+                result = cursor.fetchone()
+        finally:
+            connection.close()
+        if result == None:
+            return False
+        else:
+            return result
+    
+    def get_last_entry(self):
+        '''
+        method to get last entry stored on database
+        '''
+        connection = Dbconnect.get_connection()
+        try:
+            with connection.cursor() as cursor:
+                # confirm account credentials
+                sql = queries["Get Last User"]
                 cursor.execute(sql)
                 # get result of confirming credentials
                 result = cursor.fetchone()
