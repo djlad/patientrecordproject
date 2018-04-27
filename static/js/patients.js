@@ -1,7 +1,6 @@
 console.log("patient.js imported")
 
 function loadPatients(pages){
-    console.log('starting patients');
     //console.log(pages.entry);
     createEntryList(pages, 'patient');
     createEntryList(pages, 'doctor');

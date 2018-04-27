@@ -24,7 +24,14 @@ function onMakeAppointment(){
     appointment.doctorID = input.getElementsByTagName('select')[1].value;
     appointment.time = input.getElementsByTagName('input')[0].value;
     appointment.location = input.getElementsByTagName('input')[1].value;
-    console.log(appointment);
+    var request = {
+        entryType:'appointment',
+        entry:appointment,
+        userInfo:userInfo
+    }
+    submitEntry(request, function(){
+        console.log('appointment saved');
+    })
 }
 
 function buildPatientDoctorDropdowns(){

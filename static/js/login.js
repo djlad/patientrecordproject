@@ -1,7 +1,6 @@
 console.log('login.js imported');
 
 function loadLogin(){
-    console.log(userInfo);
 }
 
 function onLogin(){

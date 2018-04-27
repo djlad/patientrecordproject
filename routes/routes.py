@@ -98,6 +98,7 @@ def save_entry():
     req = request.get_json()
     entryType = req['entryType']
     entry = req['entry']
+
     if entryType == 'patient':
         pm = PatientModel()
         pm.change_patient_info(entry['name'],
@@ -113,6 +114,9 @@ def save_entry():
         dm.change_doctor_info(entry['name'], 
                            entry['specialty'], 
                            entry['location'])
+    elif entryType == 'appointment':
+        print(entry)
+        
     return 'save finished'
 
 

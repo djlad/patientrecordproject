@@ -10,7 +10,6 @@ userInfo = {
 
 function loadTabs(){
 
-    console.log('here')
     urls = [
         "landing-page",
         "appointments",
