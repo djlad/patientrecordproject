@@ -105,9 +105,13 @@ function addEntry(entryType){
     }) 
 }
 
-function deleteEntry(id, entryType){
+function deleteEntry(id, entryType, element){
     console.log(id);
     console.log(entryType);
+    console.log(element);
+    var crow = $(element).closest('tr');
+    console.log(crow);
+    crow.hide();
     $.post('/deleteentry',{
         userInfo:userInfo,
         ID:id,
