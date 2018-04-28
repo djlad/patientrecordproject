@@ -19,7 +19,13 @@ function onLogin(){
             if ('invalid credentials' === response){
                 openModal('Login', 'Invalid Username or Password');
             } else {
+                $(".user-drop").hide();
                 userInfo = response;
+                openModal('Login',
+                'You have successfully logged in as a '+userInfo.userType);
+
+                var userTypeToDrop = ['Patient', 'Nurse', 'Doctor', 'Admin'];
+                $(".user-drop").eq(userTypeToDrop.indexOf(userInfo.userType)).show();
             }
         }});
 }

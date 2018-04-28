@@ -50,7 +50,7 @@ function genBuildTabs(pages){
         pages['prescriptions'] = selectorTemplate({selectorType:'prescription'});
         pages['doctors'] = selectorTemplate({selectorType:'doctor'});
         document.body.innerHTML = tabHolderTemplate(pages);
-        //from patients.html
+        $('.user-drop').hide();
         loadPatients(pages);
         loadLogin();
         loadMakeAppointment();

@@ -31,6 +31,7 @@ function onMakeAppointment(){
     }
     submitEntry(request, function(){
         console.log('appointment saved');
+        openModal('Appointments:', "Appointment Saved");
     })
 }
 
