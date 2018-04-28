@@ -11,8 +11,8 @@ class AppointmentModel(object):
         try:
             with connection.cursor() as cursor:
                 # Create a new record
-                sql =queries["Add Appointment"]
-                cursor.execute(sql, (doctorid, patientid, appointmenttime))
+                sql = queries["Add Appointment"]
+                cursor.execute(sql, (None, doctorid, patientid, appointmenttime))
             # connection is not autocommit by default. So you must commit to save
             # your changes.
             connection.commit()
@@ -20,13 +20,13 @@ class AppointmentModel(object):
             connection.close()
         return "add appointment success"
     
-    def change_appointment(self, doctorid, patientid, appointmenttime):
+    def change_appointment(self, appointmentID, appointmenttime):
         connection = Dbconnect.get_connection()
         try:
             with connection.cursor() as cursor:
                 # Create a new record
-                sql =queries["Change Appointment"]
-                cursor.execute(sql, (doctorid, patientid, appointmenttime))
+                sql = queries["Change Appointment"]
+                cursor.execute(sql, (appointmenttime, appointmentID))
             # connection is not autocommit by default. So you must commit to save
             # your changes.
             connection.commit()
@@ -34,13 +34,13 @@ class AppointmentModel(object):
             connection.close()
         return "change appointment success"
     
-    def cancel_appointment(self,doctorid, patientid, appointmenttime):
+    def cancel_appointment(self, appointmentID):
         connection = Dbconnect.get_connection()
         try:
             with connection.cursor() as cursor:
                 # Create a new record
                 sql = queries["Remove Appointment"]
-                cursor.execute(sql, (doctorid, patientid, appointmenttime))
+                cursor.execute(sql, (appointmentID))
             # connection is not autocommit by default. So you must commit to save
             # your changes.
             connection.commit()
@@ -48,17 +48,17 @@ class AppointmentModel(object):
             connection.close()
         return "change appointment success"
 
-    def view_appointment(self, doctorid, patientid):
+    def get_appointment_by_id(self, appointmentID):
         connection = Dbconnect.get_connection()
         try:
             with connection.cursor() as cursor:
                 # Create a new record
-                sql = queries["View Appointments"]
-                cursor.execute(sql, (doctorid, patientid))
+                sql = queries["Get Appointment by ID"]
+                cursor.execute(sql, (appointmentID))
             # connection is not autocommit by default. So you must commit to save
             # your changes.
             connection.commit()
-            result = cursor.fetchall()
+            result = cursor.fetchone()
         finally:
             connection.close()
         return result

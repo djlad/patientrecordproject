@@ -15,7 +15,7 @@ class PrescriptionModel(object):
             with connection.cursor() as cursor:
                 # create a new user index
                 sql = queries["Add Prescription"]
-                cursor.execute(sql, (doctorID, patientID, prescription))
+                cursor.execute(sql, (None, doctorID, patientID, prescription))
             # connection is not autocommit by default. So you must commit to save
             # your changes.
             connection.commit()
@@ -23,7 +23,7 @@ class PrescriptionModel(object):
             connection.close()
         return "add prescription success"
     
-    def change_prescription(self, doctorID, patientID, prescription):
+    def change_prescription(self, prescriptionID, prescription):
         '''
         method to change an existing prescription index in the database
         '''
@@ -32,7 +32,7 @@ class PrescriptionModel(object):
             with connection.cursor() as cursor:
                 # change prescription information
                 sql = queries["Change Prescription"]
-                cursor.execute(sql, (doctorID, patientID, prescription))
+                cursor.execute(sql, (prescription, prescriptionID))
             # connection is not autocommit by default. So you must commit to save
             # your changes.
             connection.commit()
@@ -40,7 +40,7 @@ class PrescriptionModel(object):
             connection.close()
         return "edit prescription success"
     
-    def remove_prescription(self, doctorID, patientID, prescription):
+    def remove_prescription(self, prescriptionID):
         '''
         method to remove a prescription from the database
         '''
@@ -49,7 +49,7 @@ class PrescriptionModel(object):
             with connection.cursor() as cursor:
                 # cremove prescription from database
                 sql = queries["Remove Prescription"]
-                cursor.execute(sql, (doctorID, patientID, prescription))
+                cursor.execute(sql, (prescriptionID))
             # connection is not autocommit by default. So you must commit to save
             # your changes.
             connection.commit()
@@ -57,7 +57,7 @@ class PrescriptionModel(object):
             connection.close()
         return "edit prescription success"
     
-    def get_prescriptions(self, patientID):
+    def get_prescriptions_for_patient(self, patientID):
         '''
         method to get all precriptions for a certain patient
         '''
@@ -71,10 +71,23 @@ class PrescriptionModel(object):
                 result = cursor.fetchall()
         finally:
             connection.close()
-        if result == None:
-            return False
-        else:
-            return result
+        return result
+    
+    def get_prescription_by_id(self, prescriptionID):
+        '''
+        method to get prescription by id
+        '''
+        connection = Dbconnect.get_connection()
+        try:
+            with connection.cursor() as cursor:
+                # get all prescriptions assigned to a patient
+                sql = queries["Get Prescription by ID"]
+                cursor.execute(sql, (prescriptionID))
+                # get result of prescriptions query
+                result = cursor.fetchone()
+        finally:
+            connection.close()
+        return result
     
     def get_prescription_info_list(self, limit=1000, offset = 0):
         '''
