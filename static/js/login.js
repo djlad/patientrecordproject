@@ -1,7 +1,6 @@
 console.log('login.js imported');
 
 function loadLogin(){
-    console.log(userInfo);
 }
 
 function onLogin(){
@@ -17,13 +16,16 @@ function onLogin(){
         contentType:'application/json',
         type: 'POST',
         success: function(response){
-            console.log(response)
             if ('invalid credentials' === response){
-                console.log('invalidated');
-                var loginModal = document.getElementById('login-modal');
-                console.log(loginModal);
+                openModal('Login', 'Invalid Username or Password');
             } else {
+                $(".user-drop").hide();
                 userInfo = response;
+                openModal('Login',
+                'You have successfully logged in as a '+userInfo.userType);
+
+                var userTypeToDrop = ['Patient', 'Nurse', 'Doctor', 'Admin'];
+                $(".user-drop").eq(userTypeToDrop.indexOf(userInfo.userType)).show();
             }
         }});
 }

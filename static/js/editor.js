@@ -19,13 +19,21 @@ function saveEntry(editorType){
         entry:entry,
         userInfo:userInfo
     }
+    var callback = function(){
+        status.innerHTML = 'save complete';
+        console.log('reloaded');
+        loadPatients(pages);
+    }
+    
+    submitEntry(request, callback);
+}
+
+function submitEntry(request, callback){
+    console.log(request);
     $.ajax("/save", {
         data:JSON.stringify(request),
         contentType:'application/json',
         type: 'POST',
-        success: function(){
-            status.innerHTML = 'save complete';
-            console.log('reloaded');
-            loadPatients(pages);
-        }});
+        success: callback
+    });
 }

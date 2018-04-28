@@ -29,23 +29,16 @@ def add_user():
 @mainroutes.route('/login', methods=['Post'])
 def login():
     userInfo = request.get_json()
-<<<<<<< Updated upstream
-    print(userInfo)
-=======
     # get inputted data from login form
->>>>>>> Stashed changes
     username = userInfo['username']
     password = userInfo['password']
     # create a usermodel object
     um = UserModel()
     # confirm credentials to those on server
     userInfo = um.confirm_credentials(username, password)
-<<<<<<< Updated upstream
-    if userInfo == None:
-=======
-    # if uaerInfo == None, set isvalid flag to false, otherwise set to true
+    print('userInfo')
+    print(userInfo)
     if not userInfo:
->>>>>>> Stashed changes
         isvalid = False
     else:
         isvalid = True
@@ -86,10 +79,8 @@ def get_entries():
 def get_entry_by_id():
     id = request.form['id']
     entryType = request.form['entryType']
-<<<<<<< Updated upstream
-=======
+    print('hello world')
     print(entryType)
->>>>>>> Stashed changes
     if entryType == 'patient':
         pm = PatientModel()
         info = pm.get_patient_info_by_id(id)
@@ -110,8 +101,10 @@ def get_entry_by_id():
 @mainroutes.route('/save', methods=['Post'])
 def save_entry():
     req = request.get_json()
-    entryType = request.form['entryType']
-    if 'patient':
+    entryType = req['entryType']
+    entry = req['entry']
+
+    if entryType == 'patient':
         pm = PatientModel()
         pm.change_patient_info(entry['name'],
                            entry['weight'],
@@ -121,13 +114,11 @@ def save_entry():
                            entry['height'],
                            entry['medicalhistory'],
                            entry['patientID'])
-    elif 'doctor':
+    elif entryType == 'doctor':
         dm = DoctorModel()
         dm.change_doctor_info(entry['name'], 
                            entry['specialty'], 
                            entry['location'])
-<<<<<<< Updated upstream
-=======
     elif entryType == 'appointment':
         am = AppointmentModel()
         am.change_appointment(entry['appointmentID'],
@@ -137,7 +128,6 @@ def save_entry():
         pm.change_prescription(entry['prescriptionID'],
                             entry['prescription'])
         print(entry)
->>>>>>> Stashed changes
     return 'save finished'
 
 
@@ -179,10 +169,7 @@ def addEntry():
         am = AppointmentModel()
         am.make_appointment(0,0,"1111-11-11 11:11:11")
     return 'entry saved'
-
-<<<<<<< Updated upstream
-=======
-
+  
 @mainroutes.route('/deleteentry', methods=['Post'])
 def delete_entry():
     entryType = request.form['entryType']
@@ -209,7 +196,6 @@ def delete_entry():
         am.cancel_appointment(ID)
     return 'entry deleted'
 
->>>>>>> Stashed changes
 def random_garbage():
     '''
     function to create a random username and password when creating a new user

@@ -45,7 +45,7 @@ queries = {
     ''',
     "Confirm Credentials":
     '''
-    SELECT userID, userType, permissionLevel FROM user WHERE username=%s AND password=%s;
+    SELECT * FROM user WHERE username=%s AND password=%s;
     ''',
     "Create Appointment":
     '''
@@ -69,9 +69,11 @@ queries = {
     ''',
     "Get Appointment List":
     '''
-    SELECT appointment.time, patientInfo.name, appointment.doctorID
+    SELECT appointment.time, patientInfo.name as patient,
+           appointment.appointmentID, doctorInfo.name as doctor
     FROM appointment
     INNER JOIN patientInfo ON appointment.patientID = patientInfo.patientID
+    INNER JOIN doctorInfo ON appointment.doctorID = doctorInfo.doctorID
     LIMIT %s OFFSET %s;
     ''',
     "Add Prescription":
@@ -92,7 +94,12 @@ queries = {
     ''',
     "Get Prescription List":
     '''
-    SELECT * FROM prescription LIMIT %s OFFSET %s
+    SELECT prescription.prescription, prescription.prescriptionID,
+           doctorInfo.name as doctor, patientInfo.name as patient
+    FROM prescription
+    INNER JOIN patientInfo ON prescription.patientID = patientInfo.patientID
+    INNER JOIN doctorInfo ON prescription.doctorID = doctorInfo.doctorID
+    LIMIT %s OFFSET %s;
     ''',
     "Get Prescription by ID":
     '''

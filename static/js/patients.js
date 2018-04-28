@@ -1,7 +1,6 @@
 console.log("patient.js imported")
 
 function loadPatients(pages){
-    console.log('starting patients');
     //console.log(pages.entry);
     createEntryList(pages, 'patient');
     createEntryList(pages, 'doctor');
@@ -9,11 +8,16 @@ function loadPatients(pages){
     createEntryList(pages, 'prescription');
 }
 
-function createEntryList(pages, selectorType) {
+function getEntries(entryType, callback){
     $.post("/getentries", {
-        entryType:selectorType,
+        entryType:entryType,
         userInfo:userInfo
-    }, genGetPatients(pages, selectorType))
+    }, callback);
+}
+
+function createEntryList(pages, selectorType) {
+    var callback = genGetPatients(pages, selectorType);
+    getEntries(selectorType, callback);
 }
 
 function genGetPatients(pages, selectorType){
@@ -22,8 +26,8 @@ function genGetPatients(pages, selectorType){
     function getPatients(patientsResponse){
         for (var i=0;i<patientsResponse.length;i++){
             patientsResponse[i].ID = patientsResponse[i][idName];
-            patientsResponse[i].selectorType = selectorType;
             delete patientsResponse[i][idName];
+            patientsResponse[i].selectorType = selectorType;
         }
         var headers = [];
         if (patientsResponse.length > 0){
@@ -77,9 +81,8 @@ function getEntryById(id, entryType, callback){
 function goToEditor(id, editorType){
     var editorLink = document.getElementById('editor-link');
     var editorDiv = document.getElementById('editor');
-    var template = Handlebars.compile('');
+    var template = Handlebars.compile(pages['editor']);
     var html;
-    template = Handlebars.compile(pages['editor']);
     //editorType is same as entry type in database
     getEntryById(id, editorType, function(response){
         if (response.length > 0){
@@ -100,4 +103,16 @@ function addEntry(entryType){
     }, function(){
         console.log(entryType + ' added');
     }) 
+}
+
+function deleteEntry(id, entryType){
+    console.log(id);
+    console.log(entryType);
+    $.post('/deleteentry',{
+        userInfo:userInfo,
+        ID:id,
+        entryType:entryType
+    }, function(){
+        console.log('deleted entry');
+    })
 }

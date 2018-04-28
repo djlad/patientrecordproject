@@ -4,13 +4,12 @@ function onload(){
 
 pages = {};
 userInfo = {
-        username:"DanLad1",
-        password:"password1"
+        //username:"DanLad1",
+        //password:"password1"
     }
 
 function loadTabs(){
 
-    console.log('here')
     urls = [
         "landing-page",
         "appointments",
@@ -18,7 +17,9 @@ function loadTabs(){
         "entry",
         "editor",
         'selector-table',
-        'login'
+        'login',
+        'makeappointment',
+        'select-gen'
     ]
     //pages = {};
     var elm = document.getElementById(urls[0]);
@@ -49,10 +50,20 @@ function genBuildTabs(pages){
         pages['prescriptions'] = selectorTemplate({selectorType:'prescription'});
         pages['doctors'] = selectorTemplate({selectorType:'doctor'});
         document.body.innerHTML = tabHolderTemplate(pages);
-        //from patients.html
+        $('.user-drop').hide();
         loadPatients(pages);
         loadLogin();
+        loadMakeAppointment();
     }
+}
+
+function openModal(header, body){
+    var loginModal = $('#alert-modal');
+    var bodyElm = loginModal.find('p');
+    var headerElm = loginModal.find('h4');
+    bodyElm.text(body);
+    headerElm.text(header);
+    loginModal.modal();
 }
 
 Handlebars.registerHelper('if_eq', function(a, b, opts) {
