@@ -19,10 +19,11 @@
             </thead>
             <tbody>
                 {{#each entries}}
-                <tr onclick="goToEditor({{ID}}, '{{selectorType}}')" >
+                <tr>
                     {{#each this}}
-                    <td>{{this}}</td>
+                    <td onclick="goToEditor({{ID}}, '{{selectorType}}')">{{this}}</td>
                     {{/each}}
+                    <td><button onclick="deleteEntry({{ID}}, '{{selectorType}}')">Delete</button></td>
                 </tr>
                 {{/each}}
             </tbody>

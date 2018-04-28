@@ -153,6 +153,15 @@ def addEntry():
         dm.add_doctor(lastEntry['userID'],"","","")
     return 'entry saved'
 
+
+@mainroutes.route('/deleteentry', methods=['Post'])
+def delete_user():
+    entryType = request.form['entryType']
+    ID = request.form['ID']
+    print(entryType)
+    print(ID)
+    return 'entry deleted'
+
 def random_garbage():
     '''
     function to create a random username and password when creating a new user

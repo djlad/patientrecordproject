@@ -104,3 +104,15 @@ function addEntry(entryType){
         console.log(entryType + ' added');
     }) 
 }
+
+function deleteEntry(id, entryType){
+    console.log(id);
+    console.log(entryType);
+    $.post('/deleteentry',{
+        userInfo:userInfo,
+        ID:id,
+        entryType:entryType
+    }, function(){
+        console.log('deleted entry');
+    })
+}
