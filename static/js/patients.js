@@ -100,12 +100,13 @@ function addEntry(entryType){
     $.post("/addentry", {
         userInfo:userInfo,
         entryType:entryType
-    }, function(){
+    }, function(response){
         console.log(entryType + ' added');
+        console.log(response);
     }) 
 }
 
-function deleteEntry(id, entryType){
+function deleteEntry(id, entryType, buttonElm){
     console.log(id);
     console.log(entryType);
     $.post('/deleteentry',{
@@ -114,5 +115,6 @@ function deleteEntry(id, entryType){
         entryType:entryType
     }, function(){
         console.log('deleted entry');
+        $(buttonElm).closest('tr').hide();
     })
 }
