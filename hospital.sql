@@ -155,7 +155,20 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'ChaMan1','password','Patient',3),(2,'DanLad1','password1','Patient',3),(3,'LouPea1','password!','Patient',3),(4,'JacRob1','drowssap','Patient',3),(5,'MicJac1','drowssap!','Patient',3),(6,'DomKlu1','drowssap1','Patient',3),(7,'JamMic1','pass12!','Patient',3),(8,'NatJam1','word13!','Patient',3),(9,'MicJon1','ilovemycats','Patient',3),(10,'ChaMan2','qwerty11','Patient',3),(11,'DrOx','obamadid','Doctor',2),(12,'DrRed','johnCena2020','Doctor',2),(13,'DrShe','FreeKanye','Doctor',2);
+INSERT INTO `user` VALUES (1,'ChaMan1','password','Patient',3),
+                          (2,'DanLad1','password1','Patient',3),
+                          (3,'LouPea1','password!','Patient',3),
+                          (4,'JacRob1','drowssap','Patient',3),
+                          (5,'MicJac1','drowssap!','Patient',3),
+                          (6,'DomKlu1','drowssap1','Patient',3),
+                          (7,'JamMic1','pass12!','Patient',3),
+                          (8,'NatJam1','word13!','Patient',3),
+                          (9,'MicJon1','ilovemycats','Patient',3),
+                          (10,'ChaMan2','qwerty11','Patient',3),
+                          (11,'DrOx','obamadid','Doctor',2),
+                          (12,'DrRed','johnCena2020','Doctor',2),
+                          (13,'DrShe','FreeKanye','Doctor',2),
+                          (14, 'admin', 'admin','Admin',1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
