@@ -49,11 +49,15 @@ queries = {
     ''',
     "Create Appointment":
     '''
-    INSERT INTO appointment VALUES(%s,%s,"%s");
+    INSERT INTO appointment VALUES(%s,%s,%s,%s);
     ''',
     "Alter Appointment":
     '''
-    UPDATE appointment SET time=%s WHERE doctorID=%s,patientID=%s,time=%s;
+    UPDATE appointment SET `time`=%s WHERE `appointmentID`=%s;
+    ''',
+    "Get Appointment by ID":
+    '''
+    SELECT * FROM appointment WHERE appointmentID=%s;
     ''',
     "Remove Appointment":
     '''
@@ -74,15 +78,15 @@ queries = {
     ''',
     "Add Prescription":
     '''
-    INSERT INTO Prescription VALUES(%s,%s,%s);
+    INSERT INTO Prescription VALUES(%s,%s,%s,%s);
     ''',
     "Change Prescription":
     '''
-    UPDATE Prescription SET prescription=%s WHERE doctorID=%s,patientID=%s,prescription=%s;
+    UPDATE Prescription SET `prescription`=%s WHERE `prescriptionID`=%s;
     ''',
     "Remove Prescription":
     '''
-    DELETE FROM Prescription WHERE doctorID=%s,patientID=%s,prescription={);
+    DELETE FROM Prescription WHERE `prescriptionID`=%s;
     ''',
     "Get Patient Prescriptions":
     '''
@@ -96,6 +100,10 @@ queries = {
     INNER JOIN patientInfo ON prescription.patientID = patientInfo.patientID
     INNER JOIN doctorInfo ON prescription.doctorID = doctorInfo.doctorID
     LIMIT %s OFFSET %s;
+    ''',
+    "Get Prescription by ID":
+    '''
+    SELECT * FROM prescription WHERE `prescriptionID`=%s;
     ''',
     "Add Doctor":
     '''
@@ -112,6 +120,10 @@ queries = {
     "Get Doctor Info by Specialization":
     '''
     Select name,specialty,location FROM DoctorInfo WHERE specialty=%s;
+    ''',
+    "Get Doctor by ID":
+    '''
+    SELECT name, specialty,location FROM doctorInfo WHERE doctorID=%s;
     ''',
     "Get Doctor Info List":
     '''

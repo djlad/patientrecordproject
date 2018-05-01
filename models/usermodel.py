@@ -74,10 +74,7 @@ class UserModel(object):
                 result = cursor.fetchone()
         finally:
             connection.close()
-        if result == None:
-            return False
-        else:
-            return result
+        return result
     
     def get_last_entry(self):
         '''
@@ -93,7 +90,4 @@ class UserModel(object):
                 result = cursor.fetchone()
         finally:
             connection.close()
-        if result == None:
-            return False
-        else:
-            return result
+        return result

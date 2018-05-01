@@ -54,10 +54,7 @@ class DoctorModel(object):
                 result = cursor.fetchall()
         finally:
             connection.close()
-        if result == None:
-            return False
-        else:
-            return result
+        return result
     
     def get_doctor_info_by_specialization(self, specialization):
         '''
@@ -73,10 +70,7 @@ class DoctorModel(object):
                 result = cursor.fetchall()
         finally:
             connection.close()
-        if result == None:
-            return False
-        else:
-            return result
+        return result
     
     def get_doctor_info_list(self, limit=1000, offset=0):
         '''
@@ -89,6 +83,21 @@ class DoctorModel(object):
                 sql = queries["Get Doctor Info List"]
                 cursor.execute(sql, (limit, offset))
                 result = cursor.fetchall()
+        finally:
+            connection.close()
+        return result
+    
+    def get_doctor_by_id(self, doctorID):
+        '''
+        method to get doctor information by doctorID
+        '''
+        connection = Dbconnect.get_connection()
+        try:
+            with connection.cursor() as cursor:
+                # get all patients within defined limit and offset
+                sql = queries["Get Doctor by ID"]
+                cursor.execute(sql, (doctorID))
+                result = cursor.fetchone()
         finally:
             connection.close()
         return result

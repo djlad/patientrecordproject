@@ -29,11 +29,12 @@ def add_user():
 @mainroutes.route('/login', methods=['Post'])
 def login():
     userInfo = request.get_json()
+    # get inputted data from login form
     username = userInfo['username']
     password = userInfo['password']
-    #TODO: this function must verify the username/password
-    #and return the userInfo of this user.
+    # create a usermodel object
     um = UserModel()
+    # confirm credentials to those on server
     userInfo = um.confirm_credentials(username, password)
     print('userInfo')
     print(userInfo)
@@ -41,6 +42,7 @@ def login():
         isvalid = False
     else:
         isvalid = True
+    # if isvalid is true, return json of information, otherwise return invalid credentials
     if isvalid:
         return jsonify(userInfo)
     else:
@@ -84,13 +86,16 @@ def get_entry_by_id():
         info = pm.get_patient_info_by_id(id)
     elif entryType == 'doctor':
         dm = DoctorModel()
-        info = [{'testdata':'placeholder'}]
+        info = dm.get_doctor_by_id(id)
+        #info = [{'testdata':'placeholder'}]
     elif entryType == 'appointment':
         am = AppointmentModel()
-        info = [{'testdata':'placeholder'}]
+        info = am.get_appointment_by_id(id)
+        #info = [{'testdata':'placeholder'}]
     elif entryType == 'prescription':
         pm = PrescriptionModel()
-        info = [{'testdata':'placeholder'}]
+        info = pm.get_prescription_by_id(id)
+        #info = [{'testdata':'placeholder'}]
     return jsonify(info)
 
 @mainroutes.route('/save', methods=['Post'])
@@ -115,8 +120,14 @@ def save_entry():
                            entry['specialty'], 
                            entry['location'])
     elif entryType == 'appointment':
+        am = AppointmentModel()
+        am.change_appointment(entry['appointmentID'],
+                            entry["time"])
+    elif entryType == 'prescription':
+        pm = PrescriptionModel()
+        pm.change_prescription(entry['prescriptionID'],
+                            entry['prescription'])
         print(entry)
-        
     return 'save finished'
 
 
@@ -151,15 +162,38 @@ def addEntry():
         lastEntry = um.get_last_entry()
         dm = DoctorModel()
         dm.add_doctor(lastEntry['userID'],"","","")
+    elif entryType == 'prescription':
+        pm = PrescriptionModel()
+        pm.add_prescription(0,0,"")
+    elif entryType == 'appointment':
+        am = AppointmentModel()
+        am.make_appointment(0,0,"1111-11-11 11:11:11")
     return 'entry saved'
-
-
+  
 @mainroutes.route('/deleteentry', methods=['Post'])
-def delete_user():
+def delete_entry():
     entryType = request.form['entryType']
     ID = request.form['ID']
-    print(entryType)
-    print(ID)
+    if entryType == 'patient':
+        print(entryType)
+        print(ID)
+        pm = PatientModel()
+        pm.remove_patient(ID)
+    elif entryType == 'doctor':
+        print(entryType)
+        print(ID)
+        dm = DoctorModel()
+        dm.remove_patients(ID)
+    elif entryType == 'prescription':
+        print(entryType)
+        print(ID)
+        pm = PrescriptionModel()
+        pm.remove_prescription(ID)
+    elif entryType == 'appointment':
+        print(entryType)
+        print(ID)
+        am = AppointmentModel()
+        am.cancel_appointment(ID)
     return 'entry deleted'
 
 def random_garbage():
