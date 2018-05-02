@@ -11,6 +11,17 @@
 ****/
 
 /* login */
+
+#makeprescription {
+    background-color: #3a9dca;
+    color: black;
+    width: 300px;
+    text-align:left;
+    margin: auto;
+    border: 2px solid black;
+    border-radius: 25px;
+}
+
 #login {
     background-color: #3a9dca;
     color: black;

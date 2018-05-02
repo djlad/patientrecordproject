@@ -19,7 +19,8 @@ function loadTabs(){
         'selector-table',
         'login',
         'makeappointment',
-        'select-gen'
+        'select-gen',
+        'makeprescription'
     ]
     //pages = {};
     var elm = document.getElementById(urls[0]);
@@ -54,6 +55,7 @@ function genBuildTabs(pages){
         loadPatients(pages);
         loadLogin();
         loadMakeAppointment();
+        loadMakePrescription();
     }
 }
 

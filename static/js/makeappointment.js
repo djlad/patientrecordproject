@@ -13,6 +13,7 @@ function buildDropDown(entryType){
             options:data
         });
         var dropdownelm = document.getElementById(entryType+'-drop');
+        //$('.entryType-drop').text(html);
         dropdownelm.innerHTML = html;
     });
 }
@@ -32,6 +33,7 @@ function onMakeAppointment(){
     submitEntry(request, function(){
         console.log('appointment saved');
         openModal('Appointments:', "Appointment Saved");
+        loadPatients(pages);
     })
 }
 
