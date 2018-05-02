@@ -108,7 +108,7 @@ function addEntry(entryType){
 }
 
 function deleteEntry(id, entryType, buttonElm){
-    var crow = $(element).closest('tr');
+    var crow = $(buttonElm).closest('tr');
     crow.hide();
     $.post('/deleteentry',{
         userInfo:userInfo,
