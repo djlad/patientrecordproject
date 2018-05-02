@@ -28,7 +28,7 @@ CREATE TABLE `DoctorInfo` (
   `specialty` varchar(100) DEFAULT NULL,
   `location` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`doctorID`),
-  CONSTRAINT `doctorinfo_ibfk_1` FOREIGN KEY (`doctorID`) REFERENCES `User` (`userID`)
+  CONSTRAINT `doctorinfo_ibfk_1` FOREIGN KEY (`doctorID`) REFERENCES `User` (`userID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -62,7 +62,7 @@ CREATE TABLE `PatientInfo` (
   `insurance` varchar(20) DEFAULT NULL,
   `DOB` date DEFAULT NULL,
   PRIMARY KEY (`patientID`),
-  CONSTRAINT `patientinfo_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `User` (`userID`)
+  CONSTRAINT `patientinfo_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `User` (`userID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -117,8 +117,8 @@ CREATE TABLE `appointment` (
   KEY `appointmentID` (`appointmentID`),
   KEY `doctorID` (`doctorID`),
   KEY `patientID` (`patientID`),
-  CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`doctorID`) REFERENCES `doctorinfo` (`doctorID`),
-  CONSTRAINT `appointment_ibfk_2` FOREIGN KEY (`patientID`) REFERENCES `patientinfo` (`patientID`)
+  CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`doctorID`) REFERENCES `doctorinfo` (`doctorID`) ON DELETE CASCADE,
+  CONSTRAINT `appointment_ibfk_2` FOREIGN KEY (`patientID`) REFERENCES `patientinfo` (`patientID`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
