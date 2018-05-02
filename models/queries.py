@@ -61,7 +61,7 @@ queries = {
     ''',
     "Remove Appointment":
     '''
-    DELETE FROM appointment WHERE doctorID=%s,patientID=%s,time=%s;
+    DELETE FROM appointment WHERE appointmentID=%s;
     ''',
     "View Appointments":
     '''

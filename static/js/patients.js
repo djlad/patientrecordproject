@@ -100,8 +100,10 @@ function addEntry(entryType){
     $.post("/addentry", {
         userInfo:userInfo,
         entryType:entryType
-    }, function(){
+    }, function(response){
         console.log(entryType + ' added');
+        loadPatients(pages);
+        console.log(response);
     }) 
 }
 

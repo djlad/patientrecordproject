@@ -40,6 +40,9 @@ class AppointmentModel(object):
             with connection.cursor() as cursor:
                 # Create a new record
                 sql = queries["Remove Appointment"]
+                print('apoint')
+                print(appointmentID)
+                print(sql)
                 cursor.execute(sql, (appointmentID))
             # connection is not autocommit by default. So you must commit to save
             # your changes.
