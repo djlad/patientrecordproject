@@ -130,8 +130,11 @@ def save_entry():
             print('save new appointment')
     elif entryType == 'prescription':
         pm = PrescriptionModel()
-        pm.change_prescription(entry['prescriptionID'],
-                            entry['prescription'])
+        tosave = 'prescriptionID' in entry
+        if tosave:
+            pm.change_prescription(entry['prescriptionID'], entry['prescription'])
+        else:
+            pm.add_prescription(entry['doctorID'], entry['patientID'], entry['prescription'])
         print(entry)
     return 'save finished'
 
