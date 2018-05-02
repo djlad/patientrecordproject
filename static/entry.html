@@ -21,9 +21,9 @@
                 {{#each entries}}
                 <tr>
                     {{#each this}}
-                    <td onclick="goToEditor({{ID}}, '{{selectorType}}')">{{this}}</td>
+                    <td onclick="goToEditor({{../ID}}, '{{../selectorType}}')">{{this}}</td>
                     {{/each}}
-                    <td><button onclick="deleteEntry({{ID}}, '{{selectorType}}', this)">Delete</button></td>
+                    <td><button onclick="deleteEntry({{ID}} , '{{selectorType}}', this)">Delete</button></td>
                 </tr>
                 {{/each}}
             </tbody>

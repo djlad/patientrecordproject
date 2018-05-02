@@ -40,6 +40,8 @@ function genGetPatients(pages, selectorType){
         };
         var entryTemplate = Handlebars.compile(pages['entry']);
         var entry = entryTemplate(pr);
+        //console.log(entry);
+        console.log(pr);
         //refers to holder defined in tabholder.html
         var entryElement = document.getElementById(holderid);
 
