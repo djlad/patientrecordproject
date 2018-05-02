@@ -121,8 +121,12 @@ def save_entry():
                            entry['location'])
     elif entryType == 'appointment':
         am = AppointmentModel()
-        am.change_appointment(entry['appointmentID'],
-                            entry["time"])
+        tosave = 'appointmentID' in entry
+        if tosave:
+            am.change_appointment(entry['appointmentID'],
+                                entry["time"])
+        else:
+            print('save new appointment')
     elif entryType == 'prescription':
         pm = PrescriptionModel()
         pm.change_prescription(entry['prescriptionID'],

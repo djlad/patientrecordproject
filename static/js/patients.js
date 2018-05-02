@@ -102,6 +102,7 @@ function addEntry(entryType){
         entryType:entryType
     }, function(response){
         console.log(entryType + ' added');
+        loadPatients(pages);
         console.log(response);
     }) 
 }
