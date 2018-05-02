@@ -131,6 +131,6 @@ queries = {
     ''',
     "Remove Doctor":
     '''
-    DELETE FROM DoctorInfo WHERE doctorID=%s;
+    DELETE FROM DoctorInfo WHERE `doctorID`=%s;
     '''
 }

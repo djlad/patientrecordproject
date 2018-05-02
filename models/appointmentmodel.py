@@ -11,7 +11,7 @@ class AppointmentModel(object):
         try:
             with connection.cursor() as cursor:
                 # Create a new record
-                sql = queries["Add Appointment"]
+                sql = queries["Create Appointment"]
                 cursor.execute(sql, (None, doctorid, patientid, appointmenttime))
             # connection is not autocommit by default. So you must commit to save
             # your changes.

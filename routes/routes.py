@@ -126,6 +126,7 @@ def save_entry():
             am.change_appointment(entry['appointmentID'],
                                 entry["time"])
         else:
+            am.make_appointment(entry['doctorID'], entry['patientID'], entry['time'])
             print('save new appointment')
     elif entryType == 'prescription':
         pm = PrescriptionModel()
@@ -187,7 +188,7 @@ def delete_entry():
         print(entryType)
         print(ID)
         dm = DoctorModel()
-        dm.remove_patients(ID)
+        dm.remove_doctor(ID)
     elif entryType == 'prescription':
         print(entryType)
         print(ID)

@@ -102,7 +102,7 @@ class DoctorModel(object):
             connection.close()
         return result
     
-    def remove_patients(self, doctorID):
+    def remove_doctor(self, doctorID):
         '''
         remove doctor from database
         '''
@@ -112,6 +112,7 @@ class DoctorModel(object):
                 # get all prescriptions assigned to a patient
                 sql = queries["Remove Doctor"]
                 cursor.execute(sql, (doctorID))
+            connection.commit()
         finally:
             connection.close()
         return "remove doctor success"
