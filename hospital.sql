@@ -142,7 +142,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `userID` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) DEFAULT NULL,
-  `password` varchar(20) DEFAULT NULL,
+  `password` varchar(256) DEFAULT NULL,
   `userType` varchar(20) DEFAULT NULL,
   `permissionLevel` tinyint(3) DEFAULT NULL,
   PRIMARY KEY (`userID`)
@@ -155,20 +155,20 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'ChaMan1','password','Patient',3),
-                          (2,'DanLad1','password1','Patient',3),
-                          (3,'LouPea1','password!','Patient',3),
-                          (4,'JacRob1','drowssap','Patient',3),
-                          (5,'MicJac1','drowssap!','Patient',3),
-                          (6,'DomKlu1','drowssap1','Patient',3),
-                          (7,'JamMic1','pass12!','Patient',3),
-                          (8,'NatJam1','word13!','Patient',3),
-                          (9,'MicJon1','ilovemycats','Patient',3),
-                          (10,'ChaMan2','qwerty11','Patient',3),
-                          (11,'DrOx','obamadid','Doctor',2),
-                          (12,'DrRed','johnCena2020','Doctor',2),
-                          (13,'DrShe','FreeKanye','Doctor',2),
-                          (14, 'admin', 'admin','Admin',1);
+INSERT INTO `user` VALUES (1,'ChaMan1','5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8','Patient',3),
+                          (2,'DanLad1','0b14d501a594442a01c6859541bcb3e8164d183d32937b851835442f69d5c94e','Patient',3),
+                          (3,'LouPea1','f82a7d02e8f0a728b7c3e958c278745cb224d3d7b2e3b84c0ecafc5511fdbdb7','Patient',3),
+                          (4,'JacRob1','4dcab0d82ccb503fea0f6f7a4d63440981cf2755d9fba55733489e8c8091fdf5','Patient',3),
+                          (5,'MicJac1','f806dcd5e1e5599a712bcc7d9a2aa59e1c90a3dc593584ca6bb675fc2ea42b47','Patient',3),
+                          (6,'DomKlu1','fa9b83321f2efbc967f9c20238b3c4a804057913497757f08ea624b2acae04f6','Patient',3),
+                          (7,'JamMic1','ff9d4758241e13386ce79d36ac03172c5846710dc3a5aee0e286c485d3ed5b8f','Patient',3),
+                          (8,'NatJam1','4f942645f37ea7ed6f90d63b46ca25e54890ab43b715ba7513d3f8b6b237b1d0','Patient',3),
+                          (9,'MicJon1','69315861d8dd53635b09f736db95c0332c0d5ab8a9d04e0e330540ba70d0fd38','Patient',3),
+                          (10,'ChaMan2','69748d7506fde6c4b8fbbc9e76e4319c4772ad3da1625119b42b867fcfb6efc5','Patient',3),
+                          (11,'DrOx','c72cd8a370c310a38fb619f12d963c7340e5e51acf44288c4da8c680c1a170e8','Doctor',2),
+                          (12,'DrRed','0ba6cc3fe38781e006e21d3e1eb0e9df704756410783c29e8c8853a2c9b247ac','Doctor',2),
+                          (13,'DrShe','5dbf896d295bf0f174cfcafbeb56a4bdfc65de9100700a4dcabb4ef85dc2155b','Doctor',2),
+                          (14, 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918','Admin',1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

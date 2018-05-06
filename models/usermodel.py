@@ -1,4 +1,5 @@
 import pymysql
+import hashlib
 from models.dbconnect import Dbconnect
 from models.patientmodel import PatientModel
 from models.queries import queries
@@ -16,7 +17,9 @@ class UserModel(object):
             with connection.cursor() as cursor:
                 # create a new user index
                 sql = queries["Add User"]
-                cursor.execute(sql, (id, username, password, userType, int(permissionLevel)))
+                passe = hashlib.sha256()
+                passe.update(password.encode())
+                cursor.execute(sql, (id, username, passe.hexdigest(), userType, int(permissionLevel)))
             # connection is not autocommit by default. So you must commit to save
             # your changes.
             connection.commit()
@@ -52,7 +55,9 @@ class UserModel(object):
             with connection.cursor() as cursor:
                 # modify user's username with inputted credentials
                 sql = queries["Change Username"]
-                cursor.execute(sql, (newUsername, username, password))
+                passe = hashlib.sha256()
+                passe.update(password.encode())
+                cursor.execute(sql, (newUsername, username, passe.hexdigest()))
             # connection is not autocommit by default. So you must commit to save
             # your changes.
             connection.commit()
@@ -69,7 +74,9 @@ class UserModel(object):
             with connection.cursor() as cursor:
                 # confirm account credentials
                 sql = queries["Confirm Credentials"]
-                cursor.execute(sql, (username, password))
+                passe = hashlib.sha256()
+                passe.update(password.encode())
+                cursor.execute(sql, (username, passe.hexdigest()))
                 # get result of confirming credentials
                 result = cursor.fetchone()
         finally:
