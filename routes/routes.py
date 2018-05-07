@@ -57,6 +57,10 @@ def get_patients():
 @mainroutes.route('/getentries', methods=['GET', 'Post'])
 def get_entries():
     entryType = request.form['entryType']
+    userInfo = None
+    if 'userInfo' in request.form:
+      userInfo = request.form['userInfo']
+      print(userInfo)
     print(entryType)
     if entryType == 'patient':
         pm = PatientModel()
@@ -65,8 +69,12 @@ def get_entries():
         dm = DoctorModel()
         entry_list = dm.get_doctor_info_list()
     elif entryType == 'appointment':
-        am = AppointmentModel()
-        entry_list = am.get_appointment_info_list()
+        am = AppointmentModel()    
+        if userInfo and userInfo.userType == 'Patient':
+            entry_list = am.get_appointment_by_id(userInfo.userID)
+        else:
+            entry_list = am.get_appointment_info_list()
+
     elif entryType == 'prescription':
         pm = PrescriptionModel()
         entry_list = pm.get_prescription_info_list()
