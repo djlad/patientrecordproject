@@ -23,7 +23,7 @@ class DoctorModel(object):
             connection.close()
         return "add doctor success"
 
-    def change_doctor_info(self, name, specialty, location):
+    def change_doctor_info(self, name, specialty, location, doctorID):
         '''
         method to modify existing doctor index
         '''
@@ -32,7 +32,7 @@ class DoctorModel(object):
             with connection.cursor() as cursor:
                 # create a new user index
                 sql = queries["Change Doctor"]
-                cursor.execute(sql, (name, specialty, location))
+                cursor.execute(sql, (name, specialty, location, doctorID))
             # connection is not autocommit by default. So you must commit to save
             # your changes.
             connection.commit()

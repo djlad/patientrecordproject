@@ -124,9 +124,11 @@ def save_entry():
                            entry['patientID'])
     elif entryType == 'doctor':
         dm = DoctorModel()
+        print(entry)
         dm.change_doctor_info(entry['name'], 
                            entry['specialty'], 
-                           entry['location'])
+                           entry['location'],
+                           entry['doctorID'])
     elif entryType == 'appointment':
         am = AppointmentModel()
         tosave = 'appointmentID' in entry

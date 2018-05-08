@@ -116,7 +116,7 @@ queries = {
     ''',
     "Change Doctor":
     '''
-    UPDATE DoctorInfo SET `name`=%s, `specialty`=%s, `location`=%s;
+    UPDATE DoctorInfo SET `name`=%s, `specialty`=%s, `location`=%s WHERE DoctorID=%s;
     ''',
     "Get Doctor Info by Name":
     '''
@@ -128,7 +128,7 @@ queries = {
     ''',
     "Get Doctor by ID":
     '''
-    SELECT name, specialty,location FROM doctorInfo WHERE doctorID=%s;
+    SELECT * FROM doctorInfo WHERE doctorID=%s;
     ''',
     "Get Doctor Info List":
     '''
