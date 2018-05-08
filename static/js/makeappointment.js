@@ -1,9 +1,11 @@
 function loadMakeAppointment(){
-    buildDropDown('patient');
-    buildDropDown('doctor');
+    var patientElm = document.getElementById('patient-drop');
+    var doctorElm = document.getElementById('doctor-drop');
+    buildDropDown('patient', patientElm);
+    buildDropDown('doctor', doctorElm);
 }
 
-function buildDropDown(entryType){
+function buildDropDown(entryType, elm){
     getEntries(entryType, function(data) {
         for (var i=0;i<data.length;i++){
             data[i]['id'] = data[i][entryType+'ID'];
@@ -12,7 +14,8 @@ function buildDropDown(entryType){
         var html = template({
             options:data
         });
-        var dropdownelm = document.getElementById(entryType+'-drop');
+        //var dropdownelm = document.getElementById(entryType+'-drop');
+        var dropdownelm = elm;
         //$('.entryType-drop').text(html);
         dropdownelm.innerHTML = html;
     });

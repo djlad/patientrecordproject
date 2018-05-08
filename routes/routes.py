@@ -87,8 +87,6 @@ def get_entries():
 def get_entry_by_id():
     id = request.form['id']
     entryType = request.form['entryType']
-    print('hello world')
-    print(entryType)
     if entryType == 'patient':
         pm = PatientModel()
         info = pm.get_patient_info_by_id(id)
@@ -104,6 +102,8 @@ def get_entry_by_id():
         pm = PrescriptionModel()
         info = pm.get_prescription_by_id(id)
         #info = [{'testdata':'placeholder'}]
+    if not isinstance(info, list):
+        info = [info]
     return jsonify(info)
 
 @mainroutes.route('/save', methods=['Post'])

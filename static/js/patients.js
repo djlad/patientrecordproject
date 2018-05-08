@@ -95,7 +95,6 @@ function goToEditor(id, editorType){
     getEntryById(id, editorType, function(response){
         if (response.length > 0){
             response = response[0];
-            console.log(response);
             html = template({editorType:editorType, entry:response});
             editorDiv.innerHTML = html;
         }
