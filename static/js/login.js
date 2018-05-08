@@ -25,6 +25,7 @@ function onLogin(){
                 'You have successfully logged in as a '+userInfo.userType);
 
                 var userTypeToDrop = ['Patient', 'Nurse', 'Doctor', 'Admin'];
+                loadPatients(pages);
                 $(".user-drop").eq(userTypeToDrop.indexOf(userInfo.userType)).show();
             }
         }});

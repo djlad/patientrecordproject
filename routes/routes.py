@@ -36,8 +36,6 @@ def login():
     um = UserModel()
     # confirm credentials to those on server
     userInfo = um.confirm_credentials(username, password)
-    print('userInfo')
-    print(userInfo)
     if not userInfo:
         isvalid = False
     else:
@@ -56,12 +54,11 @@ def get_patients():
 
 @mainroutes.route('/getentries', methods=['GET', 'Post'])
 def get_entries():
-    entryType = request.form['entryType']
+    req = request.get_json()
+    entryType = req['entryType'] #request.form['entryType']
     userInfo = None
-    if 'userInfo' in request.form:
-      userInfo = request.form['userInfo']
-      print(userInfo)
-    print(entryType)
+    if 'userInfo' in req:
+      userInfo = req['userInfo']
     if entryType == 'patient':
         pm = PatientModel()
         entry_list = pm.get_patient_info_list()
@@ -70,8 +67,8 @@ def get_entries():
         entry_list = dm.get_doctor_info_list()
     elif entryType == 'appointment':
         am = AppointmentModel()    
-        if userInfo and userInfo.userType == 'Patient':
-            entry_list = am.get_appointment_by_id(userInfo.userID)
+        if userInfo and userInfo['userType'] == 'Patient':
+            entry_list = am.get_appointment_by_id(userInfo['userID'])
         else:
             entry_list = am.get_appointment_info_list()
 
@@ -80,6 +77,9 @@ def get_entries():
         entry_list = pm.get_prescription_info_list()
     else:
         entry_list = [{'error':'invalid entry request'}]
+
+    if not isinstance(entry_list, list):
+        entry_list = [entry_list]
     return jsonify(entry_list)
 
 

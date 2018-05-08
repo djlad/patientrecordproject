@@ -57,7 +57,12 @@ queries = {
     ''',
     "Get Appointment by ID":
     '''
-    SELECT * FROM appointment WHERE appointmentID=%s;
+    SELECT appointment.time, patientInfo.name as patient,
+           appointment.appointmentID, doctorInfo.name as doctor
+    FROM appointment
+    INNER JOIN patientInfo ON appointment.patientID = patientInfo.patientID
+    INNER JOIN doctorInfo ON appointment.doctorID = doctorInfo.doctorID
+    WHERE appointmentID=%s;
     ''',
     "Remove Appointment":
     '''

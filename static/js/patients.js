@@ -9,10 +9,16 @@ function loadPatients(pages){
 }
 
 function getEntries(entryType, callback){
-    $.post("/getentries", {
+    let request = {
         entryType:entryType,
         userInfo:userInfo
-    }, callback);
+    }
+    $.ajax("/getentries", {
+        data:JSON.stringify(request),
+        contentType:'application/json',
+        type: 'POST',
+        success: callback
+    });
 }
 
 function createEntryList(pages, selectorType) {
@@ -41,7 +47,7 @@ function genGetPatients(pages, selectorType){
         var entryTemplate = Handlebars.compile(pages['entry']);
         var entry = entryTemplate(pr);
         //console.log(entry);
-        console.log(pr);
+        //console.log(pr);
         //refers to holder defined in tabholder.html
         var entryElement = document.getElementById(holderid);
 
