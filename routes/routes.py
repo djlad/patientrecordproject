@@ -68,7 +68,7 @@ def get_entries():
     elif entryType == 'appointment':
         am = AppointmentModel()    
         if userInfo and userInfo['userType'] == 'Patient':
-            entry_list = am.get_appointment_by_id(userInfo['userID'])
+            entry_list = am.get_appointments_by_patient_id(userInfo['userID'])
         else:
             entry_list = am.get_appointment_info_list()
 
@@ -80,6 +80,10 @@ def get_entries():
 
     if not isinstance(entry_list, list):
         entry_list = [entry_list]
+    
+    if len(entry_list) == 1 and not entry_list[0]:
+        entry_list = []
+
     return jsonify(entry_list)
 
 

@@ -65,6 +65,21 @@ class AppointmentModel(object):
         finally:
             connection.close()
         return result
+
+    def get_appointments_by_patient_id(self, patientID):
+        connection = Dbconnect.get_connection()
+        try:
+            with connection.cursor() as cursor:
+                # Create a new record
+                sql = queries["Get Appointments by patientID"]
+                cursor.execute(sql, (patientID))
+            # connection is not autocommit by default. So you must commit to save
+            # your changes.
+            connection.commit()
+            result = cursor.fetchone()
+        finally:
+            connection.close()
+        return result
         
     def get_appointment_info_list(self, limit=1000, offset = 0):
         '''

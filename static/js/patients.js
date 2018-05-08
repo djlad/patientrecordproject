@@ -30,6 +30,9 @@ function genGetPatients(pages, selectorType){
     var holderid = selectorType+'-holder';
     var idName = selectorType+'ID';
     function getPatients(patientsResponse){
+        if (selectorType == 'appointment'){
+            console.log(patientsResponse)
+        }
         for (var i=0;i<patientsResponse.length;i++){
             patientsResponse[i].ID = patientsResponse[i][idName];
             delete patientsResponse[i][idName];
